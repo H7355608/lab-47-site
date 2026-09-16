@@ -13,10 +13,13 @@ automatically (about a minute). Nothing else is needed.
 
 ## Editing
 
-Commits must be authored as `contact@lab-47.com` (the Netlify team email). This
-folder's git config is already set to it. Netlify blocks builds from a private
-repo when the commit author is not a verified team member. It also counts
-`Co-authored-by:` trailers as contributors, so leave those out of commits here.
+This repository is public on purpose. Netlify's Starter plan blocks builds from a
+private repository unless every commit author is a verified team member, and it
+treats a repo linked by deploy key as private regardless. Public sidesteps all of
+that. Nothing here is secret: every file is served as-is at lab-47.com.
+
+This folder's git config authors commits as `contact@lab-47.com`, the Netlify
+team email, which keeps the Netlify contributor list tidy.
 
 Edit the files, commit, push:
 

@@ -13,6 +13,10 @@ automatically (about a minute). Nothing else is needed.
 
 ## Editing
 
+Commits must be authored as `contact@lab-47.com` (the Netlify team email). This
+folder's git config is already set to it. Netlify blocks builds from a private
+repo when the commit author is not a verified team member.
+
 Edit the files, commit, push:
 
     git add -A

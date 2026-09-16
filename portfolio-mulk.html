@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Engineering an agent&rsquo;s eyes and hands &mdash; Lab-47</title>
+<meta name="description" content="How a world simulation was built end to end by directing an AI agent, and the observability apparatus that let it verify a system it could not see or play.">
+<link rel="canonical" href="https://lab-47.com/portfolio-mulk.html">
+<meta property="og:title" content="Engineering an agent&rsquo;s eyes and hands &mdash; Lab-47">
+<meta property="og:description" content="How a world simulation was built end to end by directing an AI agent, and the observability apparatus that let it verify a system it could not see or play.">
+<meta property="og:type" content="article">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.documentElement.classList.add('js')})()</script>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="brand" href="index.html" aria-label="Lab-47, home">
+    <img class="on-light" src="assets/lab47-wordmark-light.webp" alt="Lab-47" width="760" height="206">
+    <img class="on-dark" src="assets/lab47-wordmark.webp" alt="Lab-47" width="760" height="206">
+  </a>
+  <nav id="primary-nav" aria-label="Primary" hidden>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Games</a>
+      <a href="portfolio.html" aria-current="page">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.5 12H5M19 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+    <svg class="m" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4h14M1 8h14M1 12h14"/></svg>
+    <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+</header>
+
+<main id="main">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="portfolio.html">Case studies</a><span class="sep">/</span>Mulk</p>
+      <p class="eyebrow">Agentic workflow &middot; observability for agents</p>
+      <h1 class="h1">Engineering an agent&rsquo;s eyes and hands</h1>
+      <p class="lede">A browser-delivered world simulation built end to end by directing Claude Code. The real engineering was not the code generation but the <strong>apparatus built to let an AI agent observe and operate</strong> an emergent simulation it cannot see or play.</p>
+      <div class="btn-row" style="margin-top:32px"><a class="btn btn--primary" href="https://mulk.lab-47.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.2 12h17.6"/><path d="M12 3c2.4 2.6 2.4 15.4 0 18M12 3c-2.4 2.6-2.4 15.4 0 18"/></svg>Play Mulk <span class="arr">&#8599;</span></a><a class="btn" href="mulk.html">About Mulk <span class="arr">&rarr;</span></a></div>
+    </div>
+  </div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <dl class="specs"><div class="cell"><dt>Project</dt><dd>Mulk</dd></div><div class="cell"><dt>Engine</dt><dd>Godot 4.7 &middot; web export</dd></div><div class="cell"><dt>World grid</dt><dd>512&times;256 cells</dd></div><div class="cell"><dt>Channels</dt><dd>3 MCP servers</dd></div><div class="cell"><dt>Build span</dt><dd>9 days</dd></div><div class="cell"><dt>Status</dt><dd>Playable</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="doc-layout">
+        <aside class="doc-toc">
+          <p class="eyebrow">Contents</p>
+          <ol><li><a href="#problem">The problem</a></li><li><a href="#hands">The hands</a></li><li><a href="#eyes">The eyes</a></li><li><a href="#memory">Memory &amp; inner loop</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#limits">Limitations</a></li><li><a href="#competencies">Competencies</a></li></ol>
+        </aside>
+        <div class="doc-body">
+
+<section class="doc-sec rv" id="problem">
+  <h2>The problem</h2>
+  <p>A solo build structured as a director-and-agent division of labour. The codebase is largely
+     agent-written; the engineering documented here is the workflow that made that possible and kept it
+     correct.</p>
+  <p>Mulk (Arabic: <em>dominion</em>) is a discrete-tick world simulation. Civilizations arise on a real
+     Earth &mdash; loaded from a GEBCO elevation heightmap &mdash; or on procedural worlds, then spread,
+     trade, war, convert, invent, fragment and collapse on their own across seven ages, while the player
+     reaches in with about 37 god-powers. It runs two modes, a free-form Sandbox and a scored Shepherd
+     challenge, over a 512&times;256 world grid, exported to the browser.</p>
+  <p>The development challenge, and the actual subject of this write-up, is that <strong>an AI coding agent
+     has two blind spots: it cannot see the screen, and it cannot play</strong>. For ordinary software that
+     is survivable. For an emergent simulation whose behaviour only appears over thousands of ticks, it is
+     fatal &mdash; you cannot tell whether mega-nations fragment correctly, or whether the climate model
+     depopulates the subarctic, by reading code or glancing at a single frame.</p>
+  <p>The entire workflow is an apparatus engineered to close those two gaps: to give the agent
+     <strong>eyes</strong> (visual and numeric) and <strong>hands</strong> (drive the editor and the running
+     game).</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 900 500" role="img" aria-label="The agent writes and operates the game through three MCP channels (hands), and observes it back through numeric probes and a screenshot pipeline (eyes), forming a closed loop.">
+  <defs>
+    <marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="rgba(201,150,59,.75)"/></marker>
+    <marker id="m1h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+  </defs>
+
+  <!-- loop arrows -->
+  <path class="edge hot" d="M196,232 C 226,120 244,118 274,118" marker-end="url(#m1h)"/>
+  <path class="edge" d="M616,118 C 664,140 672,214 690,250" marker-end="url(#m1)"/>
+  <path class="edge hot" d="M742,338 C 700,406 648,392 618,392" marker-end="url(#m1h)"/>
+  <path class="edge" d="M274,392 C 226,408 206,330 196,300" marker-end="url(#m1)"/>
+
+  <text class="elab" x="214" y="150">write / operate</text>
+  <text class="elab" x="214" y="356">observe / verify</text>
+
+  <!-- containers -->
+  <rect class="dwrap" x="270" y="24" width="350" height="206" rx="4"/>
+  <text class="dlabel" x="286" y="44">Hands: write &amp; operate</text>
+  <rect class="dwrap" x="270" y="300" width="350" height="156" rx="4"/>
+  <text class="dlabel" x="286" y="320">Eyes: observe &amp; verify</text>
+
+  <!-- agent -->
+  <rect class="dn hot" x="40" y="212" width="150" height="108" rx="3"/>
+  <text class="dt hd" x="115" y="256" text-anchor="middle">Claude Code</text>
+  <text class="dt hd" x="115" y="274" text-anchor="middle">agent</text>
+  <text class="dt sm" x="115" y="294" text-anchor="middle">director-driven</text>
+
+  <!-- hands nodes -->
+  <rect class="dn acc" x="290" y="58" width="310" height="46" rx="3"/>
+  <text class="dt" x="445" y="78" text-anchor="middle">godot MCP</text>
+  <text class="dt sm" x="445" y="93" text-anchor="middle">author scripts &amp; scenes &middot; ~70 tools</text>
+  <rect class="dn acc" x="290" y="112" width="310" height="46" rx="3"/>
+  <text class="dt" x="445" y="132" text-anchor="middle">godot-enhanced MCP</text>
+  <text class="dt sm" x="445" y="147" text-anchor="middle">heavy editor systems &middot; ~35 tools</text>
+  <rect class="dn acc" x="290" y="166" width="310" height="46" rx="3"/>
+  <text class="dt" x="445" y="186" text-anchor="middle">MCPBridge</text>
+  <text class="dt sm" x="445" y="201" text-anchor="middle">puppeteer the live game &middot; TCP 9081</text>
+
+  <!-- game -->
+  <rect class="dn" x="690" y="206" width="180" height="118" rx="3"/>
+  <text class="dt hd" x="780" y="250" text-anchor="middle">Mulk</text>
+  <text class="dt sm" x="780" y="270" text-anchor="middle">emergent tick sim</text>
+  <text class="dt sm" x="780" y="286" text-anchor="middle">colony_sim.gd</text>
+  <text class="dt sm" x="780" y="302" text-anchor="middle">+ main.gd</text>
+
+  <!-- eyes nodes -->
+  <rect class="dn acc" x="290" y="334" width="310" height="46" rx="3"/>
+  <text class="dt" x="445" y="354" text-anchor="middle">Headless probes</text>
+  <text class="dt sm" x="445" y="369" text-anchor="middle">quantitative summaries</text>
+  <rect class="dn acc" x="290" y="388" width="310" height="46" rx="3"/>
+  <text class="dt" x="445" y="408" text-anchor="middle">Screenshot pipeline</text>
+  <text class="dt sm" x="445" y="423" text-anchor="middle">deterministic visual evidence</text>
+</svg>
+    <div class="dlegend">
+      <span><i class="acc"></i>Agent &amp; the closed loop</span>
+      <span><i class="hot"></i>MCP channels &amp; instruments</span>
+      <span><i class="go"></i>The running game</span>
+    </div>
+  </figure>
+</section>
+
+<section class="doc-sec rv" id="hands">
+  <h2>The hands: three control channels</h2>
+  <p>The project drives Godot through three distinct channels, configured in <code>.mcp.json</code> and
+     <code>project.godot</code>:</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Channel</th><th>Target</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>godot MCP</td><td>editor &middot; WS 6505</td><td>Everyday authoring: scripts, scene nodes, settings, errors (~70 tools)</td></tr>
+        <tr><td>godot-enhanced</td><td>editor &middot; TCP 9090</td><td>Heavier systems: animation, navmesh, themes, export, headless validation (~35 tools)</td></tr>
+        <tr><td>MCPBridge</td><td>live game &middot; TCP 9081</td><td>Inspect scene tree, set whitelisted props, inject input, watch signals, automate UI</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The two editor MCPs let the agent <strong>write</strong> the game; the runtime bridge lets it
+     <strong>observe and puppeteer</strong> the game while it runs, clicking buttons and sampling a property
+     every N frames into a ring buffer.</p>
+  <p>All three are security-hardened &mdash; shared-secret auth with lockout, constant-time compare, value
+     whitelists, read-only allowlists &mdash; because they expose a live engine to an automated client. The
+     tooling co-evolved with the game: when the enhanced server&rsquo;s auth key rotated on every reload and
+     trapped the client in a connect &rarr; auth-fail loop, the fix was to patch the server to reuse a
+     stable key. <strong>The agent maintaining its own instruments mid-project.</strong></p>
+</section>
+
+<section class="doc-sec rv" id="eyes">
+  <h2>The eyes: the agent builds its own instruments</h2>
+  <p>This is the distinctive part. A god-game&rsquo;s behaviour is emergent over thousands of ticks, so
+     instead of eyeballing, the workflow builds bespoke headless diagnostic harnesses that print
+     quantitative summaries, runs them, reads the numbers, tunes constants, and re-runs. Empirical,
+     measurement-driven tuning via CLI flags:</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Probe</th><th>What it measures</th></tr></thead>
+      <tbody>
+        <tr><td><code>--balance</code></td><td>Latitude-band capacity scan plus six cradle realms over 2000 ticks: regional fairness and the &ldquo;cold cliff&rdquo;</td></tr>
+        <tr><td><code>--worldsim</code></td><td>110 rivals, 2400 seeded ticks: alive / fragment / mega-nation / size / era / route counts</td></tr>
+        <tr><td><code>--toolsoak</code></td><td>Drives simulated clicks through the real tool dispatch, proving every god-power still fires</td></tr>
+        <tr><td><code>--stress</code>, <code>--savetest</code>, <code>--striketest</code></td><td>Late-game performance, save-load round-trips, WMD-math assertions</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Reproducible seeding is the key.</strong> It lets the agent A/B a constant change against a
+     fixed world and trust that a metric delta came from its edit, not from RNG. For the things judged by
+     eye, a separate deterministic screenshot pipeline (about 35 <code>--shot&lt;name&gt;</code> recipes)
+     seeds a state, parks the camera, optionally fast-forwards, and saves a PNG &mdash; so the agent
+     generates and curates its own visual evidence.</p>
+  <div class="callout">
+    <p class="eyebrow">The signature move</p>
+    <p>When it cannot watch, it builds a measuring instrument and reads it.</p>
+  </div>
+</section>
+
+<section class="doc-sec rv" id="memory">
+  <h2>Cross-session memory and the inner loop</h2>
+  <p>The build spanned many sessions over nine days, so Claude Code&rsquo;s file-based memory carries
+     hard-won operational knowledge forward: nine cross-linked memory files encoding the non-obvious &mdash;
+     the port-to-plugin map and how to diagnose &ldquo;not connected&rdquo;, the auth-key rotation fix, a
+     six-place checklist for adding a god-power, and the design rationale for each major system. This is
+     what kept a multi-day, 15k-line build coherent.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 900 250" role="img" aria-label="The inner development loop: plan, edit, validate, measure, then look, commit, persist and back to plan; if metrics are off, measure loops back to edit.">
+  <defs>
+    <marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="rgba(201,150,59,.75)"/></marker>
+    <marker id="m2h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+  </defs>
+
+  <!-- row1 forward -->
+  <path class="edge" d="M200,68 L 240,68" marker-end="url(#m2)"/>
+  <path class="edge" d="M420,68 L 460,68" marker-end="url(#m2)"/>
+  <path class="edge" d="M640,68 L 680,68" marker-end="url(#m2)"/>
+  <!-- measure -> look (down) -->
+  <path class="edge" d="M770,96 L 770,160" marker-end="url(#m2)"/>
+  <text class="elab" x="780" y="132">in range</text>
+  <!-- row2 backward -->
+  <path class="edge" d="M680,188 L 640,188" marker-end="url(#m2)"/>
+  <path class="edge" d="M460,188 L 420,188" marker-end="url(#m2)"/>
+  <!-- persist -> plan (up-left) -->
+  <path class="edge" d="M300,160 C 280,124 200,118 110,96" marker-end="url(#m2)"/>
+  <!-- measure -> edit feedback -->
+  <path class="edge hot" d="M690,48 C 560,16 470,16 422,48" marker-end="url(#m2h)" style="stroke-dasharray:4 4"/>
+  <text class="elab" x="556" y="20" text-anchor="middle">metrics off &rarr; re-edit</text>
+
+  <!-- row1 nodes -->
+  <rect class="dn acc" x="20" y="40" width="180" height="56" rx="3"/>
+  <text class="dt" x="110" y="64" text-anchor="middle">Plan</text>
+  <text class="dt sm" x="110" y="80" text-anchor="middle">against design docs</text>
+  <rect class="dn acc" x="240" y="40" width="180" height="56" rx="3"/>
+  <text class="dt" x="330" y="64" text-anchor="middle">Edit</text>
+  <text class="dt sm" x="330" y="80" text-anchor="middle">sim via MCP</text>
+  <rect class="dn acc" x="460" y="40" width="180" height="56" rx="3"/>
+  <text class="dt" x="550" y="64" text-anchor="middle">Validate</text>
+  <text class="dt sm" x="550" y="80" text-anchor="middle">headless &middot; errors = 0</text>
+  <rect class="dn acc" x="680" y="40" width="180" height="56" rx="3"/>
+  <text class="dt" x="770" y="64" text-anchor="middle">Measure</text>
+  <text class="dt sm" x="770" y="80" text-anchor="middle">run probe &middot; tune</text>
+
+  <!-- row2 nodes -->
+  <rect class="dn acc" x="680" y="160" width="180" height="56" rx="3"/>
+  <text class="dt" x="770" y="184" text-anchor="middle">Look</text>
+  <text class="dt sm" x="770" y="200" text-anchor="middle">screenshots / live</text>
+  <rect class="dn acc" x="460" y="160" width="180" height="56" rx="3"/>
+  <text class="dt" x="550" y="184" text-anchor="middle">Commit</text>
+  <text class="dt sm" x="550" y="200" text-anchor="middle">root cause + check</text>
+  <rect class="dn acc" x="240" y="160" width="180" height="56" rx="3"/>
+  <text class="dt" x="330" y="184" text-anchor="middle">Persist</text>
+  <text class="dt sm" x="330" y="200" text-anchor="middle">gotcha to memory</text>
+</svg>
+  </figure>
+
+  <p>A typical feature or balance cycle: <strong>plan</strong> against the design docs, <strong>edit</strong>
+     the simulation via MCP, <strong>validate</strong> headlessly (errors = 0), <strong>measure</strong> with
+     the relevant probe and tune until metrics land in range, <strong>look</strong> by regenerating
+     screenshots or driving the live game over the runtime bridge, <strong>commit</strong> with a structured
+     body stating root cause and verification, and <strong>persist</strong> any new gotcha into memory.</p>
+  <p>A recurring discipline: substantial changes are staged in the working tree and confirmed with the
+     director before committing, rather than self-committed.</p>
+</section>
+
+<section class="doc-sec rv" id="numbers">
+  <h2>Numbers</h2>
+  <p>Real figures from the codebase and history: measured, not estimated.</p>
+  <div class="metrics">
+    <div class="metric"><div class="k">Grid cells (512&times;256)</div><div class="n">131,072</div></div>
+    <div class="metric"><div class="k">God-powers</div><div class="n">~37</div></div>
+    <div class="metric"><div class="k">Commits &middot; 5 active days</div><div class="n">24</div></div>
+  </div>
+
+  <h3>Measured tuning outcomes <span class="badge badge--known">Measured</span></h3>
+  <p>The empirical loop, working. Each delta traced to a deliberate constant change against a seeded world:</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Intervention</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Cold-cliff fix</td><td>62&ndash;70&deg; latitude band carrying capacity down about 64%</td></tr>
+        <tr><td>Fragmentation rework</td><td>Largest realm ~11k cells (monotonic) &rarr; ~3.5&ndash;7k (fragment-prone)</td></tr>
+        <tr><td>Naval trade</td><td>Early-game sea routes ~5 &rarr; ~23</td></tr>
+        <tr><td>Shepherd balance bug</td><td><code>--toolsoak</code> root-caused ~29% of tool uses blocked by insufficient Favor</td></tr>
+        <tr><td>Late-game stress</td><td>240-realm run completed clean in ~55s</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The point of these is not the game balance. It is that <strong>an agent that could not watch the
+     simulation still produced quantified, verifiable results</strong>, because the measurement apparatus
+     existed.</p>
+</section>
+
+<section class="doc-sec rv" id="limits">
+  <h2>What I&rsquo;d do differently, and known limitations</h2>
+  <p>Stated plainly: these are real.</p>
+  <ul>
+    <li><strong>No conventional test suite.</strong> The diagnostic harnesses are the test suite. Defensible
+        for a solo simulation build, but a true assertion-based regression suite would catch silent breakage
+        the probes do not.</li>
+    <li><strong>Web build size.</strong> The browser export&rsquo;s <code>index.wasm</code> is large (~38 MB),
+        a downstream consequence of targeting web export from this engine and pipeline. Worth a
+        size-reduction pass.</li>
+    <li><strong>Documentation drift.</strong> The design docs ran ahead of, then behind, the implementation as
+        the game evolved emergently from its original concept. Trivial to reconcile, and worth doing.</li>
+  </ul>
+</section>
+
+<section class="doc-sec rv" id="competencies">
+  <h2>Competencies</h2>
+  <p>What this build demonstrates, in hiring terms:</p>
+  <div class="tags" style="margin:22px 0 28px">
+    <span class="tag">Agent orchestration via MCP</span>
+    <span class="tag">Observability for agents that can&rsquo;t see</span>
+    <span class="tag">Measurement-driven tuning</span>
+    <span class="tag">Reproducible-seed A/B methodology</span>
+    <span class="tag">Cross-session agent memory</span>
+    <span class="tag">Security-hardened tool exposure</span>
+    <span class="tag">Directing an agent to an invariant set</span>
+  </div>
+  <div class="callout">
+    <p class="eyebrow">The transferable lesson</p>
+    <p>Anyone can have an LLM write code. The value is in building the instruments that let an agent observe
+       and verify a system it cannot directly perceive. That generalises far beyond games.</p>
+  </div>
+  <div class="btn-row btn-row--mt">
+    <a class="btn btn--primary" href="https://mulk.lab-47.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.2 12h17.6"/><path d="M12 3c2.4 2.6 2.4 15.4 0 18M12 3c-2.4 2.6-2.4 15.4 0 18"/></svg>Play Mulk <span class="arr">&#8599;</span></a>
+    <a class="btn" href="mulk.html">About Mulk <span class="arr">&rarr;</span></a>
+    <a class="btn" href="portfolio.html">All case studies <span class="arr">&rarr;</span></a>
+  </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">Say hello.</p>
+    <a class="foot-mail" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+    <div class="foot-row">
+      <img class="foot-logo on-dark" src="assets/lab47-logo.webp" alt="Lab-47" width="900" height="222">
+      <img class="foot-logo on-light" src="assets/lab47-logo-light.webp" alt="Lab-47" width="900" height="222">
+      <nav aria-label="Footer">
+        <a href="projects.html">Games</a>
+        <a href="portfolio.html">Case studies</a>
+        <a href="about.html">About</a>
+        <a href="https://x.com/lab47official" target="_blank" rel="noopener">X</a>
+      </nav>
+      <span class="foot-copy">&copy; 2026 Lab-47 &middot; Melbourne</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

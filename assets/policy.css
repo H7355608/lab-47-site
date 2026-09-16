@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Lab-47 - policy document styles
+   Loaded only by policy pages, on top of site.css. Gives legal documents
+   their own identity: a glance panel, a collection matrix, and numbered
+   sections with the numeral set in the margin.
+   ========================================================================== */
+
+/* --- masthead ------------------------------------------------------------ */
+.pol-hero{
+  position:relative;overflow:hidden;
+  padding:76px 0 64px;border-bottom:1px solid var(--line);
+}
+.pol-hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to right,var(--line) 1px,transparent 1px) 0 0/56px 56px,
+    linear-gradient(to bottom,var(--line) 1px,transparent 1px) 0 0/56px 56px;
+  -webkit-mask-image:radial-gradient(110% 130% at 100% 0%,#000,transparent 62%);
+  mask-image:radial-gradient(110% 130% at 100% 0%,#000,transparent 62%);
+}
+.pol-hero > .wrap{position:relative}
+.pol-hero .h1{font-size:clamp(2rem,4vw,2.9rem);max-width:18ch;margin-bottom:20px}
+
+.pol-masthead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:56px;align-items:start}
+@media(max-width:900px){.pol-masthead{grid-template-columns:1fr;gap:36px}}
+
+/* the seal: a small drawn mark that stands in for a document stamp */
+.pol-seal{
+  display:flex;align-items:center;gap:14px;margin-bottom:26px;
+  font-family:var(--sans);font-size:.78rem;
+  color:var(--fg-3);
+}
+.pol-seal svg{width:34px;height:34px;flex:none;color:var(--accent);opacity:.9}
+.pol-seal b{display:block;color:var(--accent);font-weight:500;letter-spacing:.2em}
+
+/* --- at a glance --------------------------------------------------------- */
+.glance{
+  border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface);
+  padding:6px 24px;
+}
+.glance .row{display:flex;gap:15px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line)}
+.glance .row:last-child{border-bottom:0}
+.glance .row svg{width:19px;height:19px;flex:none;margin-top:2px;color:var(--accent)}
+.glance .row.no svg{color:var(--ok)}
+.glance b{display:block;font-size:.95rem;font-weight:600;letter-spacing:-.01em;color:var(--fg);margin-bottom:2px}
+.glance span{display:block;font-size:.86rem;color:var(--fg-2);line-height:1.5}
+
+/* --- collection matrix --------------------------------------------------- */
+.matrix{display:grid;gap:14px}
+.matrix .entry{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,150px);
+  gap:24px;align-items:start;
+  border:1px solid var(--line);border-left:2px solid var(--accent);
+  border-radius:var(--r-sm);background:var(--surface);padding:20px 24px;
+}
+.matrix .entry.safe{border-left-color:var(--ok)}
+.matrix .what{font-size:.98rem;font-weight:600;letter-spacing:-.01em;color:var(--fg)}
+.matrix .what small{
+  display:block;font-family:var(--sans);font-size:.76rem;font-weight:400;
+  color:var(--fg-3);margin-top:5px;
+}
+.matrix .why{font-size:.93rem;color:var(--fg-2);line-height:1.55}
+.matrix .who{
+  font-family:var(--sans);font-size:.78rem;
+  color:var(--fg-3);text-align:right;padding-top:3px;
+}
+.matrix .who.live{color:var(--ok)}
+@media(max-width:760px){
+  .matrix .entry{grid-template-columns:1fr;gap:10px}
+  .matrix .who{text-align:left}
+}
+
+/* --- numbered clauses ---------------------------------------------------- */
+.clauses{counter-reset:clause;border-top:1px solid var(--line)}
+.clause{
+  counter-increment:clause;
+  display:grid;grid-template-columns:64px minmax(0,1fr);gap:28px;
+  padding:40px 0;border-bottom:1px solid var(--line);
+  scroll-margin-top:96px;
+}
+.clause::before{
+  content:counter(clause,decimal-leading-zero);
+  font-family:var(--sans);font-size:1.5rem;font-weight:500;
+  color:var(--fg-3);opacity:.45;line-height:1;padding-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.clause > div{min-width:0}
+.clause h2{font-size:1.28rem;letter-spacing:-.022em;margin-bottom:14px}
+.clause p,.clause li{color:var(--fg-2)}
+.clause p{max-width:68ch;margin-bottom:1em}
+.clause ul{margin:0 0 1em;padding-left:1.15em;max-width:68ch}
+.clause li{margin-bottom:.5em}
+.clause strong{color:var(--fg);font-weight:500}
+.clause:target h2{color:var(--accent)}
+@media(max-width:640px){
+  .clause{grid-template-columns:1fr;gap:12px;padding:32px 0}
+  .clause::before{font-size:1.1rem;opacity:.6}
+}
+
+.clause--notice{background:linear-gradient(90deg,var(--accent-weak),transparent 60%)}
+.clause--notice h2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* --- sticky rail with reading progress ----------------------------------- */
+.pol-rail{position:sticky;top:96px}
+@media(max-width:960px){.pol-rail{position:static;margin-bottom:8px}}
+.pol-rail .track{position:relative;border-left:1px solid var(--line)}
+.pol-rail .fill{
+  position:absolute;left:-1px;top:0;width:1px;background:var(--accent);
+  height:0;transition:height .12s linear;
+}
+.pol-rail ol{list-style:none;margin:0;padding:0;counter-reset:rail}
+.pol-rail li{counter-increment:rail}
+.pol-rail a{
+  display:flex;gap:10px;padding:7px 0 7px 16px;font-size:.86rem;color:var(--fg-2);
+}
+.pol-rail a::before{
+  content:counter(rail,decimal-leading-zero);
+  font-family:var(--sans);font-size:.78rem;color:var(--fg-3);
+  padding-top:3px;flex:none;font-variant-numeric:tabular-nums;
+}
+.pol-rail a:hover{color:var(--fg)}
+.pol-rail a.active{color:var(--fg)}
+.pol-rail a.active::before{color:var(--accent)}
+
+/* --- signature block ----------------------------------------------------- */
+.pol-sign{
+  display:flex;justify-content:space-between;gap:16px 28px;flex-wrap:wrap;align-items:flex-end;
+  border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface);padding:26px 30px;margin-top:44px;
+}
+/* let the wordmark block absorb the slack so the button stays on the same line */
+.pol-sign > div{flex:1 1 260px;min-width:0}
+.pol-sign .who{font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+.pol-sign .meta{
+  font-family:var(--sans);font-size:.78rem;
+  color:var(--fg-3);margin-top:8px;
+}

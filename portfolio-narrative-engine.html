@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Structured generation and memory on a self-hosted LLM &mdash; Lab-47</title>
+<meta name="description" content="A fully offline interactive-fiction engine that runs a local language model and produces story, game state and player choices from a single generation per turn.">
+<link rel="canonical" href="https://lab-47.com/portfolio-narrative-engine.html">
+<meta property="og:title" content="Structured generation and memory on a self-hosted LLM &mdash; Lab-47">
+<meta property="og:description" content="A fully offline interactive-fiction engine that runs a local language model and produces story, game state and player choices from a single generation per turn.">
+<meta property="og:type" content="article">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.documentElement.classList.add('js')})()</script>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="brand" href="index.html" aria-label="Lab-47, home">
+    <img class="on-light" src="assets/lab47-wordmark-light.webp" alt="Lab-47" width="760" height="206">
+    <img class="on-dark" src="assets/lab47-wordmark.webp" alt="Lab-47" width="760" height="206">
+  </a>
+  <nav id="primary-nav" aria-label="Primary" hidden>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Games</a>
+      <a href="portfolio.html" aria-current="page">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.5 12H5M19 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+    <svg class="m" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4h14M1 8h14M1 12h14"/></svg>
+    <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+</header>
+
+<main id="main">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="portfolio.html">Case studies</a><span class="sep">/</span>Narrative Engine</p>
+      <p class="eyebrow">Local LLM systems &middot; self-hosted inference</p>
+      <h1 class="h1">Structured generation and memory on a self-hosted LLM</h1>
+      <p class="lede">A fully <strong>offline</strong> interactive-fiction engine that runs a local language model and coaxes story, game state and player choices out of a <strong>single generation per turn</strong>. It stays coherent across long sessions with a self-maintaining memory, with no cloud dependency and no data leaving the machine.</p>
+      <div class="btn-row" style="margin-top:32px"><a class="btn btn--primary" href="portfolio.html">All case studies <span class="arr">&rarr;</span></a><a class="btn" href="contact.html">Ask about this build <span class="arr">&rarr;</span></a></div>
+    </div>
+  </div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <dl class="specs"><div class="cell"><dt>Project</dt><dd>Narrative Engine</dd></div><div class="cell"><dt>Type</dt><dd>Internal R&amp;D bench build</dd></div><div class="cell"><dt>Serving</dt><dd>KoboldCpp &middot; local</dd></div><div class="cell"><dt>Model</dt><dd>Mistral Small 24B, 4-bit</dd></div><div class="cell"><dt>Hardware</dt><dd>RTX 5070 Ti &middot; 16&nbsp;GB</dd></div><div class="cell"><dt>Network</dt><dd>None required</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="doc-layout">
+        <aside class="doc-toc">
+          <p class="eyebrow">Contents</p>
+          <ol><li><a href="#problem">The problem</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#hard-parts">The hard parts</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#models">Models &amp; hardware</a></li><li><a href="#cloud">Cloud &amp; cost</a></li><li><a href="#next">What I&rsquo;d do differently</a></li><li><a href="#competencies">Competencies</a></li></ol>
+        </aside>
+        <div class="doc-body">
+
+<section class="doc-sec rv" id="problem">
+  <h2>The problem</h2>
+  <p>An internal R&amp;D bench build, not a shipped product, documented here as an AI-integration showcase.
+     The focus is the runtime engineering; the scenario content is interchangeable data the engine never
+     has baked in.</p>
+  <p>Interactive fiction needs three things from every turn: prose to read, a sense of progression, and a
+     set of next actions to choose from. The naive approach generates each with separate logic &mdash;
+     narration from the model, choices hardcoded or generated by a second pass, progress tracked in code.
+     That is brittle, and expensive in calls.</p>
+  <p>The goal was a self-contained, <strong>offline</strong> engine where one local model produces all three
+     at once, the application is a thin parser-and-prompt-builder around it, and arbitrary scenarios can be
+     dropped in as data without touching the engine. No API keys, no network, no per-token bill. It runs
+     entirely on local hardware.</p>
+</section>
+
+<section class="doc-sec rv" id="architecture">
+  <h2>Architecture</h2>
+  <p>The engine is a prompt-builder and parser wrapped around a locally served model. One prompt goes out
+     each turn; one reply comes back and is split into everything the interface needs.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 880 740" role="img" aria-label="Architecture: scenario JSON and player action feed a context builder, which prompts a local KoboldCpp model; the single streamed reply is parsed into narration, meters and actions; meters can unlock an ending, and a separate summary call every five turns feeds memory back into the context.">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="rgba(199,154,85,.8)"/>
+    </marker>
+    <marker id="arr2hot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+    </marker>
+  </defs>
+
+  <!-- edges -->
+  <path class="edge" d="M220,74 C 220,100 360,108 440,126" marker-end="url(#arr2)"/>
+  <path class="edge" d="M660,74 C 660,100 520,108 440,126" marker-end="url(#arr2)"/>
+  <path class="edge" d="M440,190 L 440,232" marker-end="url(#arr2)"/>
+  <path class="edge" d="M440,294 L 440,330" marker-end="url(#arr2)"/>
+  <path class="edge" d="M440,382 L 440,420" marker-end="url(#arr2)"/>
+  <path class="edge" d="M440,476 C 440,500 250,500 156,520" marker-end="url(#arr2)"/>
+  <path class="edge" d="M440,476 L 440,520" marker-end="url(#arr2)"/>
+  <path class="edge" d="M440,476 C 440,500 630,500 724,520" marker-end="url(#arr2)"/>
+  <path class="edge hot" d="M440,578 L 440,626" marker-end="url(#arr2hot)"/>
+  <path class="edge" d="M156,578 L 156,626" marker-end="url(#arr2)"/>
+  <!-- memory feedback loop -->
+  <path class="edge hot" d="M41,656 C 8,540 8,250 230,160" marker-end="url(#arr2hot)" style="stroke-dasharray:4 4"/>
+
+  <text class="elab" x="468" y="606">meter = 100</text>
+  <text class="elab" x="186" y="606">every 5 turns</text>
+  <text class="elab" x="34" y="400" transform="rotate(-90 34 400)">rolling memory &rarr; context</text>
+
+  <!-- nodes -->
+  <g>
+    <rect class="dn acc" x="70" y="16" width="300" height="58" rx="3"/>
+    <text class="dt hd" x="220" y="40" text-anchor="middle">Scenario JSON</text>
+    <text class="dt sm" x="220" y="58" text-anchor="middle">premise + system prompt + opening choices</text>
+  </g>
+  <g>
+    <rect class="dn" x="510" y="16" width="300" height="58" rx="3"/>
+    <text class="dt hd" x="660" y="40" text-anchor="middle">Player action</text>
+    <text class="dt sm" x="660" y="58" text-anchor="middle">the choice taken this turn</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="230" y="126" width="420" height="64" rx="3"/>
+    <text class="dt hd" x="440" y="151" text-anchor="middle">buildContext</text>
+    <text class="dt sm" x="440" y="172" text-anchor="middle">system + memory + last ~14 turns + action + meters</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="270" y="232" width="340" height="62" rx="3"/>
+    <text class="dt hd" x="440" y="258" text-anchor="middle">KoboldCpp local model</text>
+    <text class="dt sm" x="440" y="276" text-anchor="middle">localhost:5001 &middot; auto-detects format</text>
+  </g>
+  <g>
+    <rect class="dn" x="300" y="330" width="280" height="52" rx="3"/>
+    <text class="dt" x="440" y="354" text-anchor="middle">Single streamed reply</text>
+    <text class="dt sm" x="440" y="370" text-anchor="middle">one generation, three blocks</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="290" y="420" width="300" height="56" rx="3"/>
+    <text class="dt hd" x="440" y="444" text-anchor="middle">parse</text>
+    <text class="dt sm" x="440" y="462" text-anchor="middle">split on [STATS] / [ACTIONS]</text>
+  </g>
+  <g>
+    <rect class="dn" x="42" y="520" width="228" height="58" rx="3"/>
+    <text class="dt" x="156" y="544" text-anchor="middle">Narration</text>
+    <text class="dt sm" x="156" y="562" text-anchor="middle">&rarr; story prose</text>
+  </g>
+  <g>
+    <rect class="dn" x="326" y="520" width="228" height="58" rx="3"/>
+    <text class="dt" x="440" y="544" text-anchor="middle">Meters (0&ndash;100)</text>
+    <text class="dt sm" x="440" y="562" text-anchor="middle">&rarr; progress bars</text>
+  </g>
+  <g>
+    <rect class="dn" x="610" y="520" width="228" height="58" rx="3"/>
+    <text class="dt" x="724" y="544" text-anchor="middle">5 actions</text>
+    <text class="dt sm" x="724" y="562" text-anchor="middle">&rarr; choice buttons</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="42" y="626" width="228" height="60" rx="3"/>
+    <text class="dt" x="156" y="650" text-anchor="middle">Memory summary</text>
+    <text class="dt sm" x="156" y="668" text-anchor="middle">2nd call &middot; ~180 words</text>
+  </g>
+  <g>
+    <rect class="dn hot" x="326" y="626" width="228" height="60" rx="3"/>
+    <text class="dt" x="440" y="650" text-anchor="middle">Ending finale</text>
+    <text class="dt sm" x="440" y="668" text-anchor="middle">director instruction</text>
+  </g>
+</svg>
+    <div class="dlegend">
+      <span><i class="acc"></i>Engine subsystem</span>
+      <span><i class="hot"></i>Conditional / feedback</span>
+      <span><i class="go"></i>Parsed output</span>
+    </div>
+  </figure>
+
+  <h3>Local serving</h3>
+  <p>A local model is served by KoboldCpp, a llama.cpp-based inference server, and the engine talks to its
+     HTTP API at <code>localhost:5001</code>. On connect it auto-detects which model is running and selects
+     the matching prompt format (Mistral versus ChatML, for example), so swapping the underlying model needs
+     no code change.</p>
+
+  <h3>Scenario as data</h3>
+  <p>Each scenario is a JSON file defining the premise: a system prompt and the hand-authored opening
+     choices. The engine is fully content-agnostic. The same engine runs a training simulation, an
+     educational branching scenario or an onboarding walkthrough, because all content lives in user-authored
+     JSON and nothing about the domain is baked into the code.</p>
+
+  <h3>One call, three outputs</h3>
+  <p>Each turn the engine assembles a single prompt &mdash; scenario system prompt, rolling memory summary,
+     the last ~14 turns, the player&rsquo;s action, and current meter values &mdash; and instructs the model
+     to emit three labelled blocks in one reply: a few paragraphs of narration, a <code>[STATS]</code> block
+     of meter values from 0 to 100, and an <code>[ACTIONS]</code> block of five numbered next actions.</p>
+
+  <h3>Parse, not generate</h3>
+  <p>The streamed reply is split on the <code>[STATS]</code> and <code>[ACTIONS]</code> markers: text before
+     the markers becomes the story, the stats block becomes the progress bars, the action lines become the
+     choice buttons. During streaming the machinery blocks are hidden, so the player sees only prose until
+     parsing completes.</p>
+
+  <h3>State drives control flow</h3>
+  <p>The meters parsed from the model&rsquo;s own output feed the UI progress bars, and when a meter reaches
+     100 an ending path unlocks, sending a special director instruction back to the model to write the
+     finale. <strong>The LLM&rsquo;s output is the game state.</strong></p>
+</section>
+
+<section class="doc-sec rv" id="hard-parts">
+  <h2>The hard parts</h2>
+
+  <h3>Structure from an unreliable surface</h3>
+  <p>Local models do not guarantee clean formatting, and the whole UI depends on parsing their output. The
+     parser is deliberately defensive: it strips list markers, discards lines that are too long, too short,
+     or that look like leftover tags, and caps the set at six. If the model emits nothing usable, the engine
+     falls back to fixed controls and free typing rather than breaking. Extracting structured state from
+     free-form generation <em>without trusting the model</em> is the core reliability work.</p>
+
+  <h3>Single-call structured output</h3>
+  <p>Producing narration, meters and actions in one call is cheap and keeps them coherent with each other,
+     but it couples three concerns into one parse surface. The defensive parser is the price of that choice;
+     a function-calling or constrained-decoding approach would be more robust but was not practical for the
+     local models in use.</p>
+
+  <h3>Long-session coherence</h3>
+  <p>A fixed context window cannot hold a whole story. A second, separate LLM call runs every five turns to
+     rewrite a roughly 180-word running summary of facts and events, fed back into every subsequent prompt.
+     This is <strong>context compression as an explicit subsystem</strong>: the engine spends a call on
+     remembering so the main loop stays consistent over long play.</p>
+
+  <h3>Model heterogeneity</h3>
+  <p>Different local models expect different prompt templates. Auto-detecting the served model and switching
+     format keeps the engine model-agnostic, so the underlying model can be swapped for quality and size
+     trade-offs without touching the loop.</p>
+
+  <h3>Human versus model authorship</h3>
+  <p>Only the first turn&rsquo;s options are human-authored, per scenario; every set after is the
+     model&rsquo;s. The fixed director controls &mdash; steering buttons that inject canned instructions as
+     the player&rsquo;s action &mdash; are hardcoded UI, deliberately not AI-generated. A clean separation
+     between scripted control and generated content.</p>
+</section>
+
+<section class="doc-sec rv" id="configuration">
+  <h2>Configuration and numbers</h2>
+  <p>Architectural constants are listed below as configuration. Runtime figures &mdash; tokens per second,
+     per-turn latency, VRAM footprint &mdash; were not instrumented and depend entirely on the host hardware
+     and model size, so they are left out rather than estimated.</p>
+
+  <h3>Known configuration <span class="badge badge--known">From the build</span></h3>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Calls per turn</td><td>1 &rarr; narration + meters + 5 actions</td></tr>
+        <tr><td>Per-turn context</td><td>System prompt + memory + ~14 turns + action + meters</td></tr>
+        <tr><td>Memory</td><td>~180-word summary, rewritten every 5 turns</td></tr>
+        <tr><td>Actions</td><td>5 authored &middot; parser-capped at 6</td></tr>
+        <tr><td>Serving</td><td>KoboldCpp at <code>localhost:5001</code></td></tr>
+        <tr><td>Format</td><td>Mistral / ChatML auto-switch</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="doc-sec rv" id="models">
+  <h2>Models tested and the hardware ceiling</h2>
+  <p>Four open models, one per size tier, were tested on a single RTX 5070 Ti (16&nbsp;GB GDDR7,
+     896&nbsp;GB/s, Blackwell with FP4/FP8 support):</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Size tier</th><th>Base family</th><th>Result on 16&nbsp;GB</th></tr></thead>
+      <tbody>
+        <tr><td>12B</td><td>Mistral Nemo</td><td>Fits easily; weaker format adherence</td></tr>
+        <tr><td>22B</td><td>Mistral Small</td><td>Fits</td></tr>
+        <tr><td>24B (chosen)</td><td>Mistral Small</td><td>Fits in VRAM with workable context, and fast</td></tr>
+        <tr><td>70B</td><td>Llama-70B class</td><td>Spills to system RAM, much slower</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The deciding constraint is VRAM. At 4-bit, a 24B model&rsquo;s weights (~14&nbsp;GB) plus KV cache fit
+     inside 16&nbsp;GB with usable context, making <strong>~24B the practical ceiling for this card</strong>.
+     A 70B needs about 35&nbsp;GB at 4-bit, over double the available memory, so it runs only by offloading
+     layers to system RAM, which collapses throughput. That matches what was observed: the 24B ran fast and
+     well; the 70B was much slower with no quality gain worth the wait. The 24B sweet spot was not a
+     preference &mdash; it is where the hardware budget lands.</p>
+
+  <h3>Limitations that shaped the engine</h3>
+  <ul>
+    <li><strong>Format adherence scales with size.</strong> Smaller models honour the three-block contract
+        less reliably &mdash; the direct reason the parser is defensive rather than trusting.</li>
+    <li><strong>Quantization trade-off.</strong> Fitting 24B in 16&nbsp;GB means roughly 4-bit weights, a
+        quality compromise full-precision cloud hosting would not require.</li>
+    <li><strong>Context limits drive the memory subsystem.</strong> A fixed window cannot hold a long story,
+        hence the rolling summary.</li>
+    <li><strong>Quality plateau</strong> (observed, not benchmarked). 24B and 70B produced comparable output
+        for this task, consistent with diminishing returns at this scale for structured narrative
+        generation.</li>
+  </ul>
+</section>
+
+<section class="doc-sec rv" id="cloud">
+  <h2>Cloud deployment and cost</h2>
+  <p>How the picture changes off the local card: two paths, at current (2026) rates.</p>
+
+  <h3>A &middot; Self-host on a rented GPU</h3>
+  <p>Same KoboldCpp stack, bigger hardware, which removes the VRAM ceiling. A 24B runs in full precision on
+     an L40S (48&nbsp;GB, ~$0.79/hr) or A100 80&nbsp;GB (~$0.89&ndash;1.79/hr), and the 70B that crawled
+     locally runs fully in VRAM and fast on an A100 80&nbsp;GB. Cost is hourly regardless of use &mdash; a
+     two-hour session is roughly $1.60&ndash;3.60 &mdash; so you pay for idle time unless you auto-scale to
+     zero. It keeps control and privacy; you own the ops.</p>
+
+  <h3>B &middot; Per-token managed API <span class="badge badge--estimate">Session est.</span></h3>
+  <p>Pay only for tokens. Hosted rates at each size tier:</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Model (hosted equivalent)</th><th>Approximate rate per 1M tokens</th></tr></thead>
+      <tbody>
+        <tr><td>Mistral Nemo (12B class)</td><td>~$0.02</td></tr>
+        <tr><td>Mistral Small 24B</td><td>~$0.05&ndash;0.075</td></tr>
+        <tr><td>Llama 3.3 70B (70B class)</td><td>~$0.88</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A session is small in token terms: with full context each turn runs a few thousand input plus a few
+     hundred output tokens, so a 50-turn session is on the order of 300k tokens. That puts a full session at
+     roughly <strong>$0.02 on a 24B-class model</strong> or about $0.25 on a 70B-class model &mdash; cents
+     either way, with nothing billed when idle. The session-token figure is estimated from the engine&rsquo;s
+     context design, not instrumented.</p>
+
+  <div class="callout">
+    <p class="eyebrow">The honest conclusion</p>
+    <p>For a single intermittent user, cloud does not clearly win. Per-token managed is the cheapest cloud
+       path but ships prompts to a third party, losing the offline and privacy property that motivated the
+       local build. A rented GPU preserves control but wastes money on idle time at single-user scale. Local
+       is already optimal on both axes for one user: zero marginal cost and full privacy. And since 24B is
+       about equal to 70B for this task, there is no quality reason to reach for the larger models cloud
+       would unlock.</p>
+  </div>
+
+  <h3>Where cloud flips: concurrency</h3>
+  <p>The local engine serves one session on one machine. The moment it is multi-user, per-token serverless
+     scales cleanly and stays cheap; dedicated GPUs pay off only at sustained high throughput. The deployment
+     choice is really a function of user count, not the engine.</p>
+</section>
+
+<section class="doc-sec rv" id="next">
+  <h2>What I&rsquo;d do differently</h2>
+  <p>Honest forward judgement, drawn from the trade-offs above: the next iteration, not self-criticism.</p>
+  <ul>
+    <li><strong>Replace single-call block-parsing with constrained decoding</strong> or a JSON grammar (GBNF
+        in KoboldCpp, for example) so structure is guaranteed at generation time and the defensive parser
+        becomes a safety net rather than the primary mechanism.</li>
+    <li><strong>Treat the memory summariser as a place for a small eval harness</strong> &mdash; a handful of
+        fixed cases checking the summary retains key facts &mdash; since silent memory drift is the most
+        likely long-session failure.</li>
+    <li><strong>Make the five-turn memory cadence adaptive</strong>, summarising on event density rather than
+        a fixed counter, to avoid losing detail in busy stretches.</li>
+  </ul>
+</section>
+
+<section class="doc-sec rv" id="competencies">
+  <h2>Competencies</h2>
+  <p>What this build demonstrates, in hiring terms:</p>
+  <div class="tags" style="margin:22px 0 28px">
+    <span class="tag">Self-hosted / offline LLM serving</span>
+    <span class="tag">Structured output from free-form generation</span>
+    <span class="tag">Defensive parsing</span>
+    <span class="tag">Context-window management</span>
+    <span class="tag">Model-agnostic prompt formats</span>
+    <span class="tag">LLM output driving application state</span>
+    <span class="tag">VRAM trade-off analysis</span>
+    <span class="tag">Deployment-cost reasoning</span>
+  </div>
+  <div class="callout">
+    <p class="eyebrow">Why offline matters</p>
+    <p>Because no data leaves the machine, this architecture maps directly onto privacy-sensitive deployments
+       such as defence and healthcare, where cloud inference is a non-starter.</p>
+  </div>
+  <div class="btn-row btn-row--mt">
+    <a class="btn btn--primary" href="portfolio.html">All case studies <span class="arr">&rarr;</span></a>
+    <a class="btn" href="contact.html">Ask about this build <span class="arr">&rarr;</span></a>
+  </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">Say hello.</p>
+    <a class="foot-mail" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+    <div class="foot-row">
+      <img class="foot-logo on-dark" src="assets/lab47-logo.webp" alt="Lab-47" width="900" height="222">
+      <img class="foot-logo on-light" src="assets/lab47-logo-light.webp" alt="Lab-47" width="900" height="222">
+      <nav aria-label="Footer">
+        <a href="projects.html">Games</a>
+        <a href="portfolio.html">Case studies</a>
+        <a href="about.html">About</a>
+        <a href="https://x.com/lab47official" target="_blank" rel="noopener">X</a>
+      </nav>
+      <span class="foot-copy">&copy; 2026 Lab-47 &middot; Melbourne</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

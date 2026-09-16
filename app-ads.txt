@@ -1,0 +1,9 @@
+# app-ads.txt for lab-47.com
+# Authorised digital sellers for every Lab-47 app whose store listing names
+# lab-47.com as the developer website. One file covers all of them; a new app
+# needs no new file, only a note below. Add a line per extra ad network.
+# Spec: https://iabtechlab.com/app-ads-txt/
+#
+# Google AdMob, publisher account pub-9686128942266440. Used by:
+#   - WARDLINE: Hospital Tycoon (Android, com.greylane.wardline)
+google.com, pub-9686128942266440, DIRECT, f08c47fec0942fa0

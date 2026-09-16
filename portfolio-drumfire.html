@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A multi-agent pipeline for cross-tool game production &mdash; Lab-47</title>
+<meta name="description" content="How one natural-language prompt drives coordinated work across a game engine, an audio generator and a 3D tool, with a planning layer and an automated verification layer.">
+<link rel="canonical" href="https://lab-47.com/portfolio-drumfire.html">
+<meta property="og:title" content="A multi-agent pipeline for cross-tool game production &mdash; Lab-47">
+<meta property="og:description" content="How one natural-language prompt drives coordinated work across a game engine, an audio generator and a 3D tool, with a planning layer and an automated verification layer.">
+<meta property="og:type" content="article">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.documentElement.classList.add('js')})()</script>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="brand" href="index.html" aria-label="Lab-47, home">
+    <img class="on-light" src="assets/lab47-wordmark-light.webp" alt="Lab-47" width="760" height="206">
+    <img class="on-dark" src="assets/lab47-wordmark.webp" alt="Lab-47" width="760" height="206">
+  </a>
+  <nav id="primary-nav" aria-label="Primary" hidden>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Games</a>
+      <a href="portfolio.html" aria-current="page">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.5 12H5M19 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+    <svg class="m" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4h14M1 8h14M1 12h14"/></svg>
+    <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+</header>
+
+<main id="main">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="portfolio.html">Case studies</a><span class="sep">/</span>Drumfire</p>
+      <p class="eyebrow">Agentic systems &middot; MCP orchestration</p>
+      <h1 class="h1">A multi-agent pipeline for cross-tool game production</h1>
+      <p class="lede">One natural-language prompt drives coordinated work across a <strong>game engine, an audio generator and a 3D tool</strong>. A planning layer orchestrates the work and an automated verification layer checks it, producing assets for a shipped commercial game.</p>
+      <div class="btn-row" style="margin-top:32px"><a class="btn btn--primary" href="drumfire.html">About Drumfire <span class="arr">&rarr;</span></a><a class="btn" href="https://store.steampowered.com/app/4732680/Drumfire/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-9.96 9.2l5.3 2.19a2.83 2.83 0 0 1 1.62-.5l2.4-3.48v-.05a3.78 3.78 0 1 1 3.78 3.78h-.09l-3.42 2.44v.12a2.85 2.85 0 0 1-5.66.35l-3.8-1.57A10 10 0 1 0 12 2Zm-4.66 13.2.9.37a2.14 2.14 0 1 0 1.2-2.87l1.04.43a1.58 1.58 0 1 1-1.2 2.91l-.94-.38Zm7.98-3.7a2.52 2.52 0 1 0 0-5.05 2.52 2.52 0 0 0 0 5.04Zm0-.63a1.9 1.9 0 1 1 0-3.79 1.9 1.9 0 0 1 0 3.79Z"/></svg>Steam <span class="arr">&#8599;</span></a></div>
+    </div>
+  </div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <dl class="specs"><div class="cell"><dt>Project</dt><dd>Drumfire</dd></div><div class="cell"><dt>Domain</dt><dd>RTS roguelite &middot; Steam</dd></div><div class="cell"><dt>Tools</dt><dd>Godot &middot; ElevenLabs &middot; Blender</dd></div><div class="cell"><dt>Orchestration</dt><dd>MCP + sub-agent layers</dd></div><div class="cell"><dt>Loop rate</dt><dd>5% &rarr; ~1%</dd></div><div class="cell"><dt>Status</dt><dd>Shipped</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="doc-layout">
+        <aside class="doc-toc">
+          <p class="eyebrow">Contents</p>
+          <ol><li><a href="#problem">The problem</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#hard-parts">The hard parts</a></li><li><a href="#numbers">The numbers</a></li><li><a href="#next">What I&rsquo;d do differently</a></li></ol>
+        </aside>
+        <div class="doc-body">
+
+<section class="doc-sec rv" id="problem">
+  <h2>The problem</h2>
+  <p>Producing game content normally means context-switching by hand across separate tools: building in
+     the engine, generating sound and music, and authoring 3D assets, each with its own interface and
+     workflow. The manual loop is slow and it breaks concentration.</p>
+  <p>The goal was a pipeline where <strong>one instruction fans out into coordinated work across all three
+     tools automatically</strong>, so the operator works at the level of intent rather than tool-by-tool
+     execution. This shipped as part of Drumfire, an RTS roguelite on Steam.</p>
+</section>
+
+<section class="doc-sec rv" id="architecture">
+  <h2>Architecture</h2>
+  <p>A single prompt is decomposed and routed across three tools via MCP servers, with two agent layers
+     sitting on top of the tool layer: a planning layer that refines the request before the tools run,
+     and a verification layer that checks the result after.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 880 600" role="img" aria-label="Architecture: one prompt routed through a planning layer to four scoped MCP tools, then a verification layer, then to manual validation or shipped assets.">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="rgba(199,154,85,.8)"/>
+    </marker>
+    <marker id="arrhot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+    </marker>
+  </defs>
+
+  <!-- edges: planning -> tools -->
+  <path class="edge" d="M440,178 C 300,206 200,208 120,232" marker-end="url(#arr)"/>
+  <path class="edge" d="M440,178 C 400,206 360,210 333,232" marker-end="url(#arr)"/>
+  <path class="edge" d="M440,178 C 480,206 520,210 547,232" marker-end="url(#arr)"/>
+  <path class="edge" d="M440,178 C 580,206 680,208 760,232" marker-end="url(#arr)"/>
+  <!-- edges: tools -> verification -->
+  <path class="edge" d="M120,294 C 120,332 300,338 440,360" marker-end="url(#arr)"/>
+  <path class="edge" d="M333,294 C 333,332 400,346 440,360" marker-end="url(#arr)"/>
+  <path class="edge" d="M547,294 C 547,332 480,346 440,360" marker-end="url(#arr)"/>
+  <path class="edge" d="M760,294 C 760,332 580,338 440,360" marker-end="url(#arr)"/>
+  <!-- edges: verification -> outcomes -->
+  <path class="edge hot" d="M440,418 C 440,446 340,450 280,470" marker-end="url(#arrhot)"/>
+  <path class="edge" d="M440,418 C 440,446 560,450 620,470" marker-end="url(#arr)"/>
+  <path class="edge" d="M400,498 L 488,498" marker-end="url(#arr)"/>
+  <text class="elab" x="300" y="452" text-anchor="middle">needs human</text>
+  <text class="elab" x="585" y="452" text-anchor="middle">automated pass</text>
+  <text class="elab" x="444" y="492" text-anchor="middle">on pass</text>
+
+  <!-- nodes -->
+  <g>
+    <rect class="dn acc" x="310" y="16" width="260" height="54" rx="3"/>
+    <text class="dt hd" x="440" y="40" text-anchor="middle">Human intent</text>
+    <text class="dt sm" x="440" y="58" text-anchor="middle">one natural-language prompt</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="270" y="120" width="340" height="58" rx="3"/>
+    <text class="dt hd" x="440" y="145" text-anchor="middle">Planning / translation</text>
+    <text class="dt sm" x="440" y="164" text-anchor="middle">sub-agents &middot; refine into executable prompts</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="22" y="232" width="196" height="62" rx="3"/>
+    <text class="dt" x="120" y="258" text-anchor="middle">Godot MCP</text>
+    <text class="dt sm" x="120" y="276" text-anchor="middle">engine &middot; toolset A</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="235" y="232" width="196" height="62" rx="3"/>
+    <text class="dt" x="333" y="258" text-anchor="middle">Godot MCP</text>
+    <text class="dt sm" x="333" y="276" text-anchor="middle">engine &middot; toolset B</text>
+  </g>
+  <g>
+    <rect class="dn" x="449" y="232" width="196" height="62" rx="3"/>
+    <text class="dt" x="547" y="258" text-anchor="middle">ElevenLabs MCP</text>
+    <text class="dt sm" x="547" y="276" text-anchor="middle">SFX &amp; music</text>
+  </g>
+  <g>
+    <rect class="dn" x="662" y="232" width="196" height="62" rx="3"/>
+    <text class="dt" x="760" y="258" text-anchor="middle">Blender MCP</text>
+    <text class="dt sm" x="760" y="276" text-anchor="middle">3D automation</text>
+  </g>
+  <g>
+    <rect class="dn acc" x="270" y="360" width="340" height="58" rx="3"/>
+    <text class="dt hd" x="440" y="385" text-anchor="middle">Verification</text>
+    <text class="dt sm" x="440" y="404" text-anchor="middle">cross-validation sub-agents</text>
+  </g>
+  <g>
+    <rect class="dn hot" x="160" y="470" width="240" height="56" rx="3"/>
+    <text class="dt" x="280" y="494" text-anchor="middle">Manual validation</text>
+    <text class="dt sm" x="280" y="512" text-anchor="middle">subjective judgement</text>
+  </g>
+  <g>
+    <rect class="dn go" x="500" y="470" width="260" height="56" rx="3"/>
+    <text class="dt" x="630" y="494" text-anchor="middle">Assets &rarr; Drumfire</text>
+    <text class="dt sm" x="630" y="512" text-anchor="middle">shipped to the game</text>
+  </g>
+</svg>
+    <div class="dlegend">
+      <span><i class="acc"></i>Scoped engine toolset</span>
+      <span><i class="hot"></i>Human-in-the-loop</span>
+      <span><i class="go"></i>Shipped output</span>
+    </div>
+  </figure>
+
+  <h3>Tool layer</h3>
+  <p>Godot is exposed through <strong>two MCP variants that deliberately expose different toolsets</strong>.
+     Rather than giving one agent access to every engine operation, tool access is scoped per context,
+     which limits the agent&rsquo;s error surface and reduces token and context confusion &mdash; trading a
+     little setup for more predictable behaviour. <strong>ElevenLabs MCP</strong> handles SFX and music
+     generation; <strong>Blender MCP</strong> automates the tasks that require Blender.</p>
+
+  <h3>Planning and translation sub-agents</h3>
+  <p>These convert a loose human request into more specific, executable prompts before the tool agents
+     run. They are the layer that keeps loosely-worded intent from reaching the tools unprocessed.</p>
+
+  <h3>Verification sub-agents</h3>
+  <p>Multiple sub-agents cross-validate that produced work is functional as intended, with a defined
+     handoff to manual validation for the cases automation cannot judge.</p>
+</section>
+
+<section class="doc-sec rv" id="hard-parts">
+  <h2>The hard parts</h2>
+
+  <h3>Prompt loops</h3>
+  <p>Manual prompts occasionally sent the agents into non-converging loops. The fix was a layer of
+     sub-agents that translate the original request into more specific prompts. These both converged on
+     the intended result more reliably and reduced wasted token spend, so the planning layer does two
+     jobs at once: better outputs and lower cost.</p>
+
+  <h3>The verification boundary</h3>
+  <p>Sub-agents cross-validate whether outputs are functional as intended, catching regressions
+     automatically. A class of checks still required manual validation, and that boundary is deliberate.
+     Automated cross-validation handled functional correctness; subjective or out-of-scope judgement
+     stayed with a human. <strong>Knowing where automation&rsquo;s reliability ends is itself a design
+     decision, not a gap.</strong></p>
+
+  <h3>Heterogeneous orchestration</h3>
+  <p>Coordinating one intent across an engine, an audio service and a 3D tool, each with its own MCP
+     surface, is the core integration challenge. Scoped tool access (the two Godot variants) was part of
+     keeping it tractable.</p>
+</section>
+
+<section class="doc-sec rv" id="numbers">
+  <h2>The numbers</h2>
+  <p>Every figure below is labelled. <strong>Measured</strong> values come from observed runs;
+     <strong>estimated</strong> values are modelled from typical agentic-task token volumes and are not
+     instrumented telemetry. Nothing here is invented, and estimates are flagged as such.</p>
+
+  <h3>Stack and billing <span class="badge badge--known">Known</span></h3>
+  <p>The pipeline ran on a flat Claude Max 5&times; subscription ($100/month; Opus 4.x, mostly High
+     Effort) rather than metered per-token billing, alongside ElevenLabs Creator (about $20/month) and
+     the free Godot MCP. Because the core tools were flat subscriptions, the marginal cost of one
+     additional run was effectively $0 up to rate limits &mdash; so the meaningful figures are the flat
+     monthly spend and the equivalent metered cost as a proxy for compute consumed.</p>
+
+  <h3>Equivalent metered cost per run <span class="badge badge--estimate">Estimate</span></h3>
+  <p>At Opus 4.x API rates ($5 / $25 per million input / output tokens):</p>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Run type</th><th>Tokens (in / out)</th><th>Equivalent cost</th></tr></thead>
+      <tbody>
+        <tr><td>Light</td><td>~80k / 15k</td><td>~$0.80</td></tr>
+        <tr><td>Typical</td><td>~250k / 40k</td><td>~$2.25</td></tr>
+        <tr><td>Heavy (loops + sub-agents)</td><td>~1M / 120k</td><td>~$8.00</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Token volumes are estimated, not measured. They are modelled from typical agentic-task volumes and
+     corroborated against published Opus 4.8 benchmarks (about $1.75 for a ~200k / 30k-token edit), which
+     makes them defensible as estimates. The metered-equivalent figure is the one to lead with: it holds
+     regardless of billing plan.</p>
+
+  <h3>Latency, loops and verification</h3>
+  <div class="metrics">
+    <div class="metric">
+      <div class="k">Per run &middot; measured</div>
+      <div class="n">5&ndash;40 min</div>
+    </div>
+    <div class="metric">
+      <div class="k">Loop reduction &middot; measured</div>
+      <div class="n"><span class="accent">~5&times;</span></div>
+    </div>
+    <div class="metric">
+      <div class="k">Effective loop rate &middot; measured</div>
+      <div class="n">~1%</div>
+    </div>
+  </div>
+  <p><strong>Latency (measured).</strong> 5&ndash;40 minutes per run, mostly on High Effort. Variance
+     tracked run complexity: a single-tool asset versus multi-tool work with sub-agent passes.</p>
+  <p><strong>Loops (measured).</strong> About 5% of manual prompts entered non-converging loops. Routing
+     those through the translation layer&rsquo;s second pass resolved roughly 80% of them, cutting the
+     effective loop rate to about 1% &mdash; a roughly five-fold reduction in loop incidence.</p>
+  <p><strong>Verification (qualitative).</strong> Automated cross-validation sub-agents caught functional
+     regressions; a class of subjective checks stayed with manual review. The boundary is the complete
+     claim: automation owned functional correctness, humans owned subjective judgement.</p>
+</section>
+
+<section class="doc-sec rv" id="next">
+  <h2>What I&rsquo;d do differently</h2>
+  <p>Honest forward judgement, drawn from the failure modes above. Not self-criticism &mdash; the next
+     iteration.</p>
+  <ul>
+    <li><strong>Formalise the cross-validation sub-agents</strong> into a fixed eval suite with explicit
+        pass/fail assertions and a single quotable reliability number, rather than ad-hoc per-run checks.</li>
+    <li><strong>Instrument cost and latency from the start</strong>, so the pipeline&rsquo;s economics are
+        measured rather than estimated after the fact.</li>
+    <li><strong>Tighten the automated / manual boundary</strong> by promoting the most common manual checks
+        into automated assertions.</li>
+  </ul>
+  <div class="btn-row btn-row--mt">
+    <a class="btn btn--primary" href="drumfire.html">About Drumfire <span class="arr">&rarr;</span></a>
+    <a class="btn" href="https://store.steampowered.com/app/4732680/Drumfire/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-9.96 9.2l5.3 2.19a2.83 2.83 0 0 1 1.62-.5l2.4-3.48v-.05a3.78 3.78 0 1 1 3.78 3.78h-.09l-3.42 2.44v.12a2.85 2.85 0 0 1-5.66.35l-3.8-1.57A10 10 0 1 0 12 2Zm-4.66 13.2.9.37a2.14 2.14 0 1 0 1.2-2.87l1.04.43a1.58 1.58 0 1 1-1.2 2.91l-.94-.38Zm7.98-3.7a2.52 2.52 0 1 0 0-5.05 2.52 2.52 0 0 0 0 5.04Zm0-.63a1.9 1.9 0 1 1 0-3.79 1.9 1.9 0 0 1 0 3.79Z"/></svg>Steam <span class="arr">&#8599;</span></a>
+    <a class="btn" href="portfolio.html">All case studies <span class="arr">&rarr;</span></a>
+  </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">Say hello.</p>
+    <a class="foot-mail" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+    <div class="foot-row">
+      <img class="foot-logo on-dark" src="assets/lab47-logo.webp" alt="Lab-47" width="900" height="222">
+      <img class="foot-logo on-light" src="assets/lab47-logo-light.webp" alt="Lab-47" width="900" height="222">
+      <nav aria-label="Footer">
+        <a href="projects.html">Games</a>
+        <a href="portfolio.html">Case studies</a>
+        <a href="about.html">About</a>
+        <a href="https://x.com/lab47official" target="_blank" rel="noopener">X</a>
+      </nav>
+      <span class="foot-copy">&copy; 2026 Lab-47 &middot; Melbourne</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

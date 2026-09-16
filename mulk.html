@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mulk &mdash; Lab-47</title>
+<meta name="description" content="Mulk is a browser world simulation. Seed a real or generated map with nations and watch ages, wars, faiths and cultures unfold on their own.">
+<link rel="canonical" href="https://lab-47.com/mulk.html">
+<meta property="og:title" content="Mulk &mdash; Lab-47">
+<meta property="og:description" content="Dominion over a living world. Playable in the browser.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.documentElement.classList.add('js')})()</script>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="brand" href="index.html" aria-label="Lab-47, home">
+    <img class="on-light" src="assets/lab47-wordmark-light.webp" alt="Lab-47" width="760" height="206">
+    <img class="on-dark" src="assets/lab47-wordmark.webp" alt="Lab-47" width="760" height="206">
+  </a>
+  <nav id="primary-nav" aria-label="Primary" hidden>
+      <a href="index.html">Home</a>
+      <a href="projects.html" aria-current="page">Games</a>
+      <a href="portfolio.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.5 12H5M19 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+    <svg class="m" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4h14M1 8h14M1 12h14"/></svg>
+    <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+</header>
+
+<main id="main">
+
+  <section class="ghero">
+    <div class="wrap wrap--wide">
+      <div class="grow grow--hero">
+        <div class="gcopy">
+          <p class="crumb"><a href="projects.html">Games</a> / Mulk</p>
+          <span class="tag">World simulation &middot; Browser</span>
+          <h1>Mulk</h1>
+          <p>Seed a world with nations, set it running, and let history write itself: borders shift, faiths spread, and empires climb and fall across the ages without a script.</p>
+          <div class="btn-row"><a class="btn btn--orange" href="https://mulk.lab-47.com/" target="_blank" rel="noopener">Play in your browser &nearr;</a><a class="btn" href="portfolio-mulk.html">Case study &rarr;</a></div>
+        </div>
+        <div class="gart gart--bleed"><img src="assets/mulk-shot-world.webp" alt="A Mulk world map" width="1280" height="720" loading="eager"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <dl class="specs">
+        <div class="cell"><dt>Type</dt><dd>Simulation &middot; sandbox</dd></div>
+        <div class="cell"><dt>World</dt><dd>Real map or generated</dd></div>
+        <div class="cell"><dt>Simulates</dt><dd>Nations, ages, faiths</dd></div>
+        <div class="cell"><dt>Platform</dt><dd>Browser</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">The idea</p>
+        <h2 class="h2">Preside, don&rsquo;t play</h2>
+      </div>
+      <div class="prose rv" style="font-size:1.06rem">
+        <p>Mulk hands you a world and lets it live. You do not pick a side. You watch the whole board from above, reach in where you want, and see how the world answers.</p>
+        <p>Every realm is its own agent &mdash; land, people, rulers, faith &mdash; pursuing its own ambitions at the same time as every other. What comes out the far end is a history nobody wrote.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split rv">
+        <figure class="media shot" data-full="assets/mulk-shot-world.webp" data-caption="Realms view in the Ancient Age: a realm's full dossier and its chronicle">
+          <img src="assets/mulk-shot-world.webp" alt="The Mulk realms view showing a nation's ruler, faith, economy and chronicle" width="1280" height="720" loading="lazy">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">The world</p>
+          <h3 class="h3">A map that fights back</h3>
+          <p class="prose">Run history on the real world or on a freshly generated one. Every realm carries a chronicle you can open at any moment to read who rose, who fell, and what it cost them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">Systems</p>
+        <h2 class="h2">What the world runs on</h2>
+      </div>
+      <div class="rows rv">
+        <div class="row">
+          <h4>Nations</h4>
+          <p>Independent powers with their own land, people and ambitions, all pursuing them at once.</p>
+        </div>
+        <div class="row">
+          <h4>The ages</h4>
+          <p>Civilisations move through eras, from settlement to empire, each bringing new powers and new ways to fall.</p>
+        </div>
+        <div class="row">
+          <h4>War</h4>
+          <p>Rivalries turn to war. Fronts move, territory changes hands, and the map is redrawn by force.</p>
+        </div>
+        <div class="row">
+          <h4>Unrest</h4>
+          <p>Populations have a breaking point. Famine, oppression and ambition brew revolt and collapse from within.</p>
+        </div>
+        <div class="row">
+          <h4>Religion</h4>
+          <p>Faiths emerge, spread along trade and conquest, schism, and reshape the nations that carry them.</p>
+        </div>
+        <div class="row">
+          <h4>Culture</h4>
+          <p>Cultures form, blend and divide. Identity outlives borders and drives the next age&rsquo;s conflicts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">Captures</p>
+        <h2 class="h2">From the simulation</h2>
+        <p class="lede">Select any frame to enlarge. It is best seen in motion, so open it and run a world yourself.</p>
+      </div>
+      <div class="shot-grid rv">
+        <figure class="shot" data-full="assets/mulk-shot-shepherd.webp" data-caption="Shepherd mode: your godhood ascends, and there is favour to spend on the world below">
+          <img src="assets/mulk-shot-shepherd.webp" alt="Shepherd mode, where you preside over a people and spend favour" width="1280" height="720" loading="lazy">
+          <figcaption>Shepherd mode: preside over a people, spend your favour</figcaption>
+        </figure>
+        <figure class="shot" data-full="assets/mulk-shot-chronicle.webp" data-caption="The Chronicle of your Age: the mightiest realms and great cities before the next age begins">
+          <img src="assets/mulk-shot-chronicle.webp" alt="The Chronicle of the Age listing the mightiest realms and great cities" width="1280" height="720" loading="lazy">
+          <figcaption>The Chronicle of your Age: who rose, who fell</figcaption>
+        </figure>
+        <figure class="shot" data-full="assets/mulk-shot-americas.webp" data-caption="Culture view in a cooling Classical Age: borders, peoples and war across the Americas">
+          <img src="assets/mulk-shot-americas.webp" alt="Culture view showing borders and peoples across the Americas" width="1280" height="720" loading="lazy">
+          <figcaption>Culture view: identity and conflict across a generated age</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="btn-row rv">
+        <a class="btn btn--primary" href="https://mulk.lab-47.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.2 12h17.6"/><path d="M12 3c2.4 2.6 2.4 15.4 0 18M12 3c-2.4 2.6-2.4 15.4 0 18"/></svg>Play in your browser <span class="arr">&#8599;</span></a>
+        <a class="btn" href="portfolio-mulk.html">Read the case study <span class="arr">&rarr;</span></a>
+        <a class="btn" href="projects.html">All projects <span class="arr">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">Say hello.</p>
+    <a class="foot-mail" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+    <div class="foot-row">
+      <img class="foot-logo on-dark" src="assets/lab47-logo.webp" alt="Lab-47" width="900" height="222">
+      <img class="foot-logo on-light" src="assets/lab47-logo-light.webp" alt="Lab-47" width="900" height="222">
+      <nav aria-label="Footer">
+        <a href="projects.html">Games</a>
+        <a href="portfolio.html">Case studies</a>
+        <a href="about.html">About</a>
+        <a href="https://x.com/lab47official" target="_blank" rel="noopener">X</a>
+      </nav>
+      <span class="foot-copy">&copy; 2026 Lab-47 &middot; Melbourne</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

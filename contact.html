@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact &mdash; Lab-47</title>
+<meta name="description" content="Get in touch with Lab-47 about a project, a collaboration, or a question about how something was built.">
+<link rel="canonical" href="https://lab-47.com/contact.html">
+<meta property="og:title" content="Contact &mdash; Lab-47">
+<meta property="og:description" content="Project enquiries, collaboration, or a question about how something was built.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.documentElement.classList.add('js')})()</script>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="brand" href="index.html" aria-label="Lab-47, home">
+    <img class="on-light" src="assets/lab47-wordmark-light.webp" alt="Lab-47" width="760" height="206">
+    <img class="on-dark" src="assets/lab47-wordmark.webp" alt="Lab-47" width="760" height="206">
+  </a>
+  <nav id="primary-nav" aria-label="Primary" hidden>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Games</a>
+      <a href="portfolio.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.5 12H5M19 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+    <svg class="m" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4h14M1 8h14M1 12h14"/></svg>
+    <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+</header>
+
+<main id="main">
+  <section class="ph">
+    <div class="wrap">
+      <span class="lab">Contact</span>
+      <h1 class="t1">Say hello.</h1>
+      <p class="lede">Project enquiry, collaboration, or a question about how something was built. Replies usually land within a day or two.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap">
+      <div class="contact">
+        <form class="form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hp"><label>Do not fill this out if you are human <input name="bot-field" id="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="form-row">
+            <div class="field" data-field><label for="name">Name <span class="req">*</span></label><input id="name" name="name" type="text" autocomplete="name" required><span class="err">Please enter your name.</span></div>
+            <div class="field" data-field><label for="email">Email <span class="req">*</span></label><input id="email" name="email" type="email" autocomplete="email" required><span class="err">Please enter a valid email address.</span></div>
+          </div>
+          <div class="field" data-field><label for="topic">Regarding</label>
+            <select id="topic" name="topic"><option>General enquiry</option><option>Project enquiry</option><option>Collaboration</option><option>Press &amp; media</option><option>Something else</option></select>
+          </div>
+          <div class="field" data-field><label for="message">Message <span class="req">*</span></label><textarea id="message" name="message" required></textarea><span class="err">Please add a short message.</span></div>
+          <div class="btn-row"><button class="btn btn--orange" type="submit" id="send-btn">Send &rarr;</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p></div>
+        </form>
+        <aside class="contact-side">
+          <span class="lab">Direct</span>
+          <a class="big-link" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+          <a class="big-link" href="https://x.com/lab47official" target="_blank" rel="noopener">@lab47official</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">Say hello.</p>
+    <a class="foot-mail" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+    <div class="foot-row">
+      <img class="foot-logo on-dark" src="assets/lab47-logo.webp" alt="Lab-47" width="900" height="222">
+      <img class="foot-logo on-light" src="assets/lab47-logo-light.webp" alt="Lab-47" width="900" height="222">
+      <nav aria-label="Footer">
+        <a href="projects.html">Games</a>
+        <a href="portfolio.html">Case studies</a>
+        <a href="about.html">About</a>
+        <a href="https://x.com/lab47official" target="_blank" rel="noopener">X</a>
+      </nav>
+      <span class="foot-copy">&copy; 2026 Lab-47 &middot; Melbourne</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===================================================================
+   Contact form (Netlify Forms)
+   Netlify detects this form at deploy time via name="contact",
+   data-netlify="true", and the hidden <input name="form-name">.
+   Submissions appear under Forms in the Netlify dashboard.
+   The handler below submits with fetch so the visitor stays on the
+   page. With JS disabled the form still POSTs natively.
+   =================================================================== */
+const CONTACT_EMAIL = "contact@lab-47.com";
+
+(function () {
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+  const btn = document.getElementById('send-btn');
+  if (!form) return;
+
+  const f = id => document.getElementById(id);
+  const wrap = el => el.closest('[data-field]');
+  const setErr = (el, bad) => { const w = wrap(el); if (w) w.classList.toggle('invalid', bad); };
+  const setStatus = (msg, kind) => { statusEl.textContent = msg; statusEl.className = 'form-status' + (kind ? ' ' + kind : ''); };
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  function validate(el) {
+    const bad = el.id === 'email' ? !emailOk(el.value.trim()) : !el.value.trim();
+    setErr(el, bad);
+    return !bad;
+  }
+
+  ['name', 'email', 'message'].forEach(id => {
+    const el = f(id);
+    el.addEventListener('input', () => { if (wrap(el).classList.contains('invalid')) validate(el); });
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (f('bot-field').value) return;                 // honeypot tripped, drop silently
+    const valid = ['name', 'email', 'message'].map(id => validate(f(id))).every(Boolean);
+    if (!valid) { setStatus('Please fix the highlighted fields.', 'bad'); return; }
+
+    const body = new URLSearchParams(new FormData(form)).toString();
+    btn.disabled = true;
+    setStatus('Sending…');
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      if (res.ok) {
+        form.reset();
+        setStatus('Message sent. Thanks, I’ll be in touch.', 'ok');
+      } else {
+        console.error('Netlify form POST failed:', res.status, res.statusText);
+        setStatus('Couldn’t send (error ' + res.status + '). Email ' + CONTACT_EMAIL + ' directly.', 'bad');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('Network error. Email ' + CONTACT_EMAIL + ' directly.', 'bad');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

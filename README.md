@@ -15,7 +15,8 @@ automatically (about a minute). Nothing else is needed.
 
 Commits must be authored as `contact@lab-47.com` (the Netlify team email). This
 folder's git config is already set to it. Netlify blocks builds from a private
-repo when the commit author is not a verified team member.
+repo when the commit author is not a verified team member. It also counts
+`Co-authored-by:` trailers as contributors, so leave those out of commits here.
 
 Edit the files, commit, push:
 

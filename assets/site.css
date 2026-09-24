@@ -457,3 +457,26 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--s
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
+
+/* --- store banners: the download row that hangs off a game hero ---------- */
+.stores{display:grid;grid-template-columns:1fr 1fr;border:var(--rule) solid var(--line)}
+.stores--attach{border-top:0}
+.store{display:flex;align-items:center;gap:clamp(14px,2vw,22px);padding:clamp(18px,2.6vw,30px) clamp(20px,3vw,40px);min-height:110px;color:inherit}
+.store + .store{border-left:var(--rule) solid var(--line)}
+.store > svg{width:clamp(30px,3.4vw,42px);height:auto;flex:none}
+.store-b{min-width:0}
+.store-k{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.store-k::before{content:"";width:8px;height:8px;background:currentColor;flex:none}
+.store-t{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(1.7rem,2.8vw,2.4rem);line-height:.95;text-transform:uppercase;letter-spacing:.02em}
+.store-a{margin-left:auto;font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1}
+a.store{background:var(--orange);color:var(--ink)}
+a.store:hover{background:var(--fg);color:var(--bg)}
+.store--soon{color:var(--fg-3)}
+.store--soon .store-k::before{background:transparent;border:2px solid currentColor}
+.store--soon .store-t{color:var(--fg)}
+.store--soon .tag{margin-left:auto;color:var(--fg)}
+@media(max-width:720px){
+  .stores{grid-template-columns:1fr}
+  .store + .store{border-left:0;border-top:var(--rule) solid var(--line)}
+  .store-a{display:none}
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blockwave: Merge Number Puzzle &mdash; Lab-47</title>
+<meta name="description" content="Blockwave is a 2048-style merge puzzle for Android. Drag number blocks onto the board, merge and double them, reach the goal and detonate. No timer, no energy, plays offline. Free on Google Play, iOS soon.">
+<link rel="canonical" href="https://lab-47.com/blockwave.html">
+<meta property="og:title" content="Blockwave: Merge Number Puzzle &mdash; Lab-47">
+<meta property="og:description" content="Merge number blocks to 2048 and beyond. No timer, no energy, plays offline. Free on Google Play.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.documentElement.classList.add('js')})()</script>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="brand" href="index.html" aria-label="Lab-47, home">
+    <img class="on-light" src="assets/lab47-wordmark-light.webp" alt="Lab-47" width="760" height="206">
+    <img class="on-dark" src="assets/lab47-wordmark.webp" alt="Lab-47" width="760" height="206">
+  </a>
+  <nav id="primary-nav" aria-label="Primary" hidden>
+      <a href="index.html">Home</a>
+      <a href="projects.html" aria-current="page">Games</a>
+      <a href="portfolio.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.5 12H5M19 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg></button>
+  <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+    <svg class="m" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4h14M1 8h14M1 12h14"/></svg>
+    <svg class="x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+</header>
+
+<main id="main">
+
+  <section class="ghero">
+    <div class="wrap wrap--wide">
+      <div class="grow grow--hero">
+        <div class="gcopy">
+          <p class="crumb"><a href="projects.html">Games</a> / Blockwave</p>
+          <span class="tag">Merge puzzle &middot; Android</span>
+          <h1>Blockwave<small>Merge Number Puzzle</small></h1>
+          <p>Drag number blocks onto the board. Equal numbers merge and double. Reach the goal, detonate it, and climb into the next world. No timer, no energy, plays offline.</p>
+          <div class="btn-row"><a class="btn" href="#screens">Screens &darr;</a></div>
+        </div>
+        <div class="gart gart--poster"><img src="assets/blockwave-splash.webp" alt="Blockwave key art: a chain of number blocks climbing from 2 to 256, the last one detonating inside the ring" width="675" height="1200" loading="eager"></div>
+      </div>
+      <div class="stores stores--attach">
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.lab47.blockwave" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2.4a1 1 0 0 0-.5.9v17.4a1 1 0 0 0 .5.9l9.2-9.6-9.2-9.6Zm10.1 8.7 2.9-3.03-10.9-6.3a.9.9 0 0 0-.2-.08l8.2 9.4Zm0 1.8-8.2 9.4a.9.9 0 0 0 .2-.08l10.9-6.3-2.9-3.02Zm4-2.1-2.4 2.5 2.4 2.5 2.2-1.27a1.4 1.4 0 0 0 0-2.46L18.4 10.8Z"/></svg>
+          <span class="store-b"><span class="store-k">Get it on</span><span class="store-t">Google Play</span></span>
+          <span class="store-a" aria-hidden="true">&nearr;</span>
+        </a>
+        <div class="store store--soon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          <span class="store-b"><span class="store-k">Coming soon</span><span class="store-t">App Store</span></span>
+          <span class="tag">iOS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <dl class="specs">
+        <div class="cell"><dt>Genre</dt><dd>Merge puzzle &middot; numbers</dd></div>
+        <div class="cell"><dt>Platform</dt><dd>Android &middot; iOS soon</dd></div>
+        <div class="cell"><dt>Price</dt><dd>Free, with ads &middot; nothing to buy</dd></div>
+        <div class="cell"><dt>Play</dt><dd>Portrait &middot; one thumb</dd></div>
+        <div class="cell"><dt>Connection</dt><dd>Not required</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">The game</p>
+        <h2 class="h2">2048, except the board explodes</h2>
+      </div>
+      <div class="prose rv" style="font-size:1.06rem">
+        <p>Pieces arrive in the tray. Drag them onto the 7&times;7 board, and when equal numbers touch they merge and double: 2, 4, 8, 16, and up. <strong>Reach the goal number and that tile detonates,</strong> clearing the board around it, doubling the goal, and dropping you into the next world.</p>
+        <p>That is the whole game. No timer, no lives, nothing to wait for. What makes it different from the other merge games is that you choose where the merge lands.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="split rv">
+        <figure class="media shot shot--phone" data-full="assets/blockwave-shot-1.webp" data-caption="The ring marks where the next merge will land">
+          <img src="assets/blockwave-shot-1.webp" alt="The Blockwave board mid-run, with a ring highlighting the square where the next merge will land" width="900" height="1600" loading="lazy">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">The ring</p>
+          <h3 class="h3">You choose where the merge lands</h3>
+          <p class="prose">Every piece carries a ring on one of its squares, and merges land where the ring is. Tap the piece to move the ring, drag to place it. Same drop, one square over: nothing, or a chain all the way to 2048.</p>
+          <p class="prose">It is the difference between a board that flows and a board that jams, and it turns a relaxing merge into a logic puzzle whenever you want one.</p>
+        </div>
+      </div>
+
+      <div class="split split--flip rv">
+        <figure class="media shot shot--phone" data-full="assets/blockwave-shot-4.webp" data-caption="One placement, several merges: the preview shows the whole chain">
+          <img src="assets/blockwave-shot-4.webp" alt="A neon world board with a two-block piece waiting in the tray, ready to trigger a chain" width="900" height="1600" loading="lazy">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">The preview</p>
+          <h3 class="h3">See the merge before you make it</h3>
+          <p class="prose">Hold a piece over the board and the game shows exactly which tiles will join and what number you will get. No guesswork, and no drop you did not mean.</p>
+          <p class="prose">Chains cascade from a single placement. Read the whole chain, then let go.</p>
+        </div>
+      </div>
+
+      <div class="split rv">
+        <figure class="media shot shot--phone" data-full="assets/blockwave-shot-2.webp" data-caption="Overload: a chain detonation clearing the board">
+          <img src="assets/blockwave-shot-2.webp" alt="An overloaded tile detonating with a chain multiplier and a large score bonus" width="900" height="1600" loading="lazy">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">Detonate</p>
+          <h3 class="h3">Reach the goal, blow it up</h3>
+          <p class="prose">Hit the goal number and that tile goes critical. Detonate it to clear the board around it. The goal doubles, and the board rolls into the next world.</p>
+          <p class="prose">The worlds are not recolours. Molten iron, a neon sign at night, the bottom of the ocean, a cherry tree in daylight. Each one looks, sounds and moves like its own place, and the order shuffles every run.</p>
+        </div>
+      </div>
+
+      <div class="split split--flip rv">
+        <figure class="media shot shot--phone" data-full="assets/blockwave-shot-3.webp" data-caption="The level route: score chases and demolition puzzles, three stars each">
+          <img src="assets/blockwave-shot-3.webp" alt="The puzzle levels map, a winding route of numbered levels with star ratings and goals like chain, make 1,024 and detonate" width="900" height="1600" loading="lazy">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">The level route</p>
+          <h3 class="h3">Score chases and demolition puzzles</h3>
+          <p class="prose">If you want goals, a level route runs beside the endless board. Some levels are relaxed score chases with no move limit. Some are demolition puzzles that take a few tries.</p>
+          <p class="prose">Three stars each, and retrying is always free.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">Design</p>
+        <h2 class="h2">Built for short breaks</h2>
+        <p class="lede">The things that usually get bolted onto a free puzzle game were left off on purpose.</p>
+      </div>
+      <div class="rows rv">
+        <div class="row">
+          <h4>No timer, no energy, no lives</h4>
+          <p>Nothing recharges and nothing runs out. A run is a few minutes, and an interrupted run resumes where it stopped.</p>
+        </div>
+        <div class="row">
+          <h4>Nothing to buy</h4>
+          <p>Blockwave is free and supported by ads, with an optional video for a second chance when a run ends. There is no shop.</p>
+        </div>
+        <div class="row">
+          <h4>No account</h4>
+          <p>No sign-in, no chat, no server of ours. Your progress lives on the phone.</p>
+        </div>
+        <div class="row">
+          <h4>One thumb, no connection</h4>
+          <p>Portrait, thumb-reachable, and it plays offline. On a plane, on the train, in the queue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="screens">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">Screens</p>
+        <h2 class="h2">From the board</h2>
+        <p class="lede">Select any frame to enlarge.</p>
+      </div>
+      <div class="shot-grid shot-grid--phone rv">
+        <figure class="shot" data-full="assets/blockwave-shot-1.webp" data-caption="Merge the numbers: the ring marks where the next merge lands">
+          <img src="assets/blockwave-shot-1.webp" alt="A Blockwave board mid-run with the ring highlighting the next merge" width="900" height="1600" loading="lazy">
+        </figure>
+        <figure class="shot" data-full="assets/blockwave-shot-2.webp" data-caption="Overload: a chain detonation clearing the board">
+          <img src="assets/blockwave-shot-2.webp" alt="An overloaded tile detonating with a chain multiplier" width="900" height="1600" loading="lazy">
+        </figure>
+        <figure class="shot" data-full="assets/blockwave-shot-4.webp" data-caption="Build chains: one placement, several merges">
+          <img src="assets/blockwave-shot-4.webp" alt="A neon world board with a piece waiting in the tray" width="900" height="1600" loading="lazy">
+        </figure>
+        <figure class="shot" data-full="assets/blockwave-shot-5.webp" data-caption="Keep climbing: a new world after every detonation">
+          <img src="assets/blockwave-shot-5.webp" alt="A gold world board with two pieces waiting in the tray" width="900" height="1600" loading="lazy">
+        </figure>
+        <figure class="shot" data-full="assets/blockwave-shot-3.webp" data-caption="The level route: score chases and demolition puzzles, three stars each">
+          <img src="assets/blockwave-shot-3.webp" alt="The puzzle levels map with numbered levels and star ratings" width="900" height="1600" loading="lazy">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="btn-row rv">
+        <a class="btn btn--primary" href="https://play.google.com/store/apps/details?id=com.lab47.blockwave" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2.4a1 1 0 0 0-.5.9v17.4a1 1 0 0 0 .5.9l9.2-9.6-9.2-9.6Zm10.1 8.7 2.9-3.03-10.9-6.3a.9.9 0 0 0-.2-.08l8.2 9.4Zm0 1.8-8.2 9.4a.9.9 0 0 0 .2-.08l10.9-6.3-2.9-3.02Zm4-2.1-2.4 2.5 2.4 2.5 2.2-1.27a1.4 1.4 0 0 0 0-2.46L18.4 10.8Z"/></svg>Get it on Google Play <span class="arr">&#8599;</span></a>
+        <a class="btn" href="blockwave-privacy.html">Privacy policy</a>
+        <a class="btn" href="projects.html">All games <span class="arr">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">Say hello.</p>
+    <a class="foot-mail" href="mailto:contact@lab-47.com">contact@lab-47.com</a>
+    <div class="foot-row">
+      <img class="foot-logo on-dark" src="assets/lab47-logo.webp" alt="Lab-47" width="900" height="222">
+      <img class="foot-logo on-light" src="assets/lab47-logo-light.webp" alt="Lab-47" width="900" height="222">
+      <nav aria-label="Footer">
+        <a href="projects.html">Games</a>
+        <a href="portfolio.html">Case studies</a>
+        <a href="about.html">About</a>
+        <a href="https://x.com/lab47official" target="_blank" rel="noopener">X</a>
+      </nav>
+      <span class="foot-copy">&copy; 2026 Lab-47 &middot; Melbourne</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

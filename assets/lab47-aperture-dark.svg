@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Lab-47 aperture mark for dark surfaces</title>
+  <desc id="desc">Four angular cream corner brackets frame seven orange square samples.</desc>
+  <path fill="#F4F2EC" d="M12 58V12h46v11H23v35zM102 12h46v46h-11V23h-35zM12 102h11v35h35v11H12zM137 102h11v46h-46v-11h35z"/>
+  <path fill="#FF7C1F" d="M74 51h16v16H74zM97 51h16v16H97zM51 74h16v16H51zM74 74h16v16H74zM97 74h16v16H97zM51 97h16v16H51zM74 97h16v16H74z"/>
+</svg>

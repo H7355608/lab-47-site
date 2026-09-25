@@ -107,8 +107,10 @@ h1,h2,h3,h4{margin:0}
   display:flex;align-items:center;gap:18px;padding:0 var(--pad);
   background:var(--bg);border-bottom:var(--rule) solid var(--line);
 }
-.bar .brand{margin-right:auto;display:inline-flex;align-items:center}
-.bar .brand img{height:22px;width:auto}
+.bar .brand{margin-right:auto;display:inline-flex;align-items:center;gap:7px;flex:none}
+.bar .brand img{height:34px;width:34px;flex:none}
+.brand-name{font-family:var(--disp);font-weight:900;font-size:1.9rem;line-height:.9;letter-spacing:-.015em;white-space:nowrap}
+.brand-name span{color:var(--orange)}
 .on-dark{display:none}
 :root[data-theme="dark"] .on-light{display:none}
 :root[data-theme="dark"] .on-dark{display:block}
@@ -439,7 +441,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--s
 .foot-mail{display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,3vw,2.6rem);line-height:1;text-transform:uppercase;color:var(--orange);border-bottom:var(--rule) solid currentColor;padding-bottom:4px}
 .foot-mail:hover{color:inherit}
 .foot-row{display:flex;align-items:center;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;margin-top:clamp(40px,8vh,90px);padding-top:26px;border-top:var(--rule) solid currentColor}
-.foot-logo{height:26px;width:auto}
+.foot-logo{display:inline-flex;align-items:center;gap:9px}
+.foot-logo img{height:38px;width:38px;flex:none}
+.foot-logo .brand-name{font-size:2.15rem}
 .foot .on-dark{display:block}
 .foot .on-light{display:none}
 :root[data-theme="dark"] .foot .on-dark{display:none}

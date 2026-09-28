@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Links &mdash; Lab-47</title>
+<meta name="description" content="Every Lab-47 game, straight to its store: Blockwave and Wardline on Google Play, Bangquet and Drumfire on Steam.">
+<link rel="canonical" href="https://lab-47.com/links.html">
+<meta property="og:title" content="Lab-47 &mdash; Get the games">
+<meta property="og:description" content="Blockwave and Wardline on Google Play, Bangquet and Drumfire on Steam.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://lab-47.com/assets/lab47-aperture-og.png">
+<link rel="icon" href="assets/aperture-favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/aperture-favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/aperture-favicon-512.png">
+<link rel="apple-touch-icon" href="assets/aperture-touch-icon.png">
+<meta name="theme-color" content="#F4F2EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('theme');var t=(q==='dark'||q==='light')?q:localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})()</script>
+<style>
+/* Link page: one column, every button goes straight to a store.
+   Same paper / ink / orange, 2px rules and hard corners as the site. */
+:root{
+  --paper:#F4F2EC;--ink:#0B0B0B;--orange:#FF7C1F;
+  --bg:var(--paper);--fg:var(--ink);--fg-2:#3A3A37;--fg-3:#77776F;--line:var(--ink);
+  --disp:"Big Shoulders Display",Impact,"Arial Narrow",sans-serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --rule:2px;
+}
+:root[data-theme="dark"]{--bg:var(--ink);--fg:#EAE4D3;--fg-2:#C9C3B3;--fg-3:#8F8A7C;--line:#EAE4D3}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:var(--ink);--fg:#EAE4D3;--fg-2:#C9C3B3;--fg-3:#8F8A7C;--line:#EAE4D3}
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+img,svg{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+h1,h2,p{margin:0}
+:focus-visible{outline:var(--rule) solid var(--orange);outline-offset:3px}
+::selection{background:var(--orange);color:var(--ink)}
+
+.page{
+  width:100%;max-width:480px;margin:0 auto;
+  padding:max(28px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(28px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+}
+
+/* header: the mark, the name, one line */
+.top{display:flex;align-items:center;gap:14px;padding-bottom:22px;border-bottom:var(--rule) solid var(--line)}
+.top img{width:56px;height:56px;flex:none}
+.on-dark{display:none}
+:root[data-theme="dark"] .on-light{display:none}
+:root[data-theme="dark"] .on-dark{display:block}
+.top h1{font-family:var(--disp);font-weight:900;font-size:2.6rem;line-height:.85;text-transform:uppercase}
+.top h1 span{color:var(--orange)}
+.top p{margin-top:6px;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+
+/* section label: orange square, condensed caps */
+.lab{
+  display:flex;align-items:center;gap:10px;margin:30px 0 12px;
+  font-family:var(--disp);font-weight:800;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.lab::before{content:"";width:10px;height:10px;background:var(--orange);flex:none}
+
+.games{display:grid;gap:14px}
+
+/* one card per game: header row, then its store buttons hanging off it */
+.game{border:var(--rule) solid var(--line)}
+.game-h{display:flex;align-items:center;gap:14px;padding:14px}
+.ico{width:60px;height:60px;flex:none;object-fit:cover;background:var(--ink)}
+.ico--pad{object-fit:contain;padding:6px}
+.game-h h2{font-family:var(--disp);font-weight:900;font-size:2rem;line-height:.9;text-transform:uppercase}
+.game-h p{margin-top:5px;font-size:.9rem;color:var(--fg-2)}
+
+.st{
+  display:flex;align-items:center;gap:14px;min-height:68px;padding:12px 16px;
+  border-top:var(--rule) solid var(--line);
+  background:var(--orange);color:var(--ink);
+}
+.st > svg{width:28px;height:28px;flex:none}
+.st-b{min-width:0}
+.st-k{display:block;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
+.st-t{display:block;font-family:var(--disp);font-weight:800;font-size:1.75rem;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.st-a{margin-left:auto;font-family:var(--disp);font-weight:800;font-size:1.8rem;line-height:1}
+a.st:hover{background:var(--fg);color:var(--bg)}
+a.st:active{background:var(--fg);color:var(--bg)}
+
+/* not out yet: muted, hatched, not a link */
+.st--lock{
+  color:var(--fg-3);cursor:not-allowed;
+  background:repeating-linear-gradient(-45deg,transparent 0 8px,rgba(127,127,127,.12) 8px 10px);
+}
+.st--lock .st-t{color:var(--fg-2)}
+.st--lock .st-a{width:22px;height:22px;margin-left:auto}
+
+.foot{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-top:34px;padding-top:18px;border-top:var(--rule) solid var(--line);
+  font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
+}
+.foot a{color:var(--fg)}
+.foot a:hover{color:var(--orange)}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="top">
+    <img class="on-light" src="assets/lab47-aperture-light.svg" alt="" width="160" height="160">
+    <img class="on-dark" src="assets/lab47-aperture-dark.svg" alt="" width="160" height="160">
+    <div>
+      <h1>Lab<span>-</span>47</h1>
+      <p>Get the games</p>
+    </div>
+  </header>
+
+  <h2 class="lab">Mobile</h2>
+  <div class="games">
+
+    <article class="game">
+      <div class="game-h">
+        <img class="ico" src="assets/blockwave-icon.webp" alt="" width="512" height="512">
+        <div><h2>Blockwave</h2><p>Merge number puzzle</p></div>
+      </div>
+      <a class="st" href="https://play.google.com/store/apps/details?id=com.lab47.blockwave" aria-label="Blockwave on Google Play">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2.4a1 1 0 0 0-.5.9v17.4a1 1 0 0 0 .5.9l9.2-9.6-9.2-9.6Zm10.1 8.7 2.9-3.03-10.9-6.3a.9.9 0 0 0-.2-.08l8.2 9.4Zm0 1.8-8.2 9.4a.9.9 0 0 0 .2-.08l10.9-6.3-2.9-3.02Zm4-2.1-2.4 2.5 2.4 2.5 2.2-1.27a1.4 1.4 0 0 0 0-2.46L18.4 10.8Z"/></svg>
+        <span class="st-b"><span class="st-k">Android &middot; Get it on</span><span class="st-t">Google Play</span></span>
+        <span class="st-a" aria-hidden="true">&nearr;</span>
+      </a>
+      <div class="st st--lock" aria-disabled="true" aria-label="Blockwave on the App Store, coming soon">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+        <span class="st-b"><span class="st-k">iOS &middot; Coming soon</span><span class="st-t">App Store</span></span>
+        <svg class="st-a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      </div>
+    </article>
+
+    <article class="game">
+      <div class="game-h">
+        <img class="ico" src="assets/wardline-icon.webp" alt="" width="512" height="512">
+        <div><h2>Wardline</h2><p>Hospital tycoon</p></div>
+      </div>
+      <a class="st" href="https://play.google.com/store/apps/details?id=com.greylane.wardline" aria-label="Wardline on Google Play">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2.4a1 1 0 0 0-.5.9v17.4a1 1 0 0 0 .5.9l9.2-9.6-9.2-9.6Zm10.1 8.7 2.9-3.03-10.9-6.3a.9.9 0 0 0-.2-.08l8.2 9.4Zm0 1.8-8.2 9.4a.9.9 0 0 0 .2-.08l10.9-6.3-2.9-3.02Zm4-2.1-2.4 2.5 2.4 2.5 2.2-1.27a1.4 1.4 0 0 0 0-2.46L18.4 10.8Z"/></svg>
+        <span class="st-b"><span class="st-k">Android &middot; Get it on</span><span class="st-t">Google Play</span></span>
+        <span class="st-a" aria-hidden="true">&nearr;</span>
+      </a>
+    </article>
+
+  </div>
+
+  <h2 class="lab">PC &middot; Steam</h2>
+  <div class="games">
+
+    <article class="game">
+      <div class="game-h">
+        <img class="ico ico--pad" src="assets/bangquet-emblem.webp" alt="" width="512" height="512">
+        <div><h2>Bangquet</h2><p>Bluffing at a loaded table</p></div>
+      </div>
+      <a class="st" href="https://store.steampowered.com/app/4951070/Bangquet/" aria-label="Bangquet on Steam">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-9.96 9.2l5.3 2.19a2.83 2.83 0 0 1 1.62-.5l2.4-3.48v-.05a3.78 3.78 0 1 1 3.78 3.78h-.09l-3.42 2.44v.12a2.85 2.85 0 0 1-5.66.35l-3.8-1.57A10 10 0 1 0 12 2Zm-4.66 13.2.9.37a2.14 2.14 0 1 0 1.2-2.87l1.04.43a1.58 1.58 0 1 1-1.2 2.91l-.94-.38Zm7.98-3.7a2.52 2.52 0 1 0 0-5.05 2.52 2.52 0 0 0 0 5.04Zm0-.63a1.9 1.9 0 1 1 0-3.79 1.9 1.9 0 0 1 0 3.79Z"/></svg>
+        <span class="st-b"><span class="st-k">PC &middot; Get it on</span><span class="st-t">Steam</span></span>
+        <span class="st-a" aria-hidden="true">&nearr;</span>
+      </a>
+    </article>
+
+    <article class="game">
+      <div class="game-h">
+        <img class="ico ico--pad" src="assets/drumfire-logo-web.webp" alt="" width="760" height="616">
+        <div><h2>Drumfire</h2><p>Missile-warfare RTS roguelite</p></div>
+      </div>
+      <a class="st" href="https://store.steampowered.com/app/4732680/Drumfire/" aria-label="Drumfire on Steam">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-9.96 9.2l5.3 2.19a2.83 2.83 0 0 1 1.62-.5l2.4-3.48v-.05a3.78 3.78 0 1 1 3.78 3.78h-.09l-3.42 2.44v.12a2.85 2.85 0 0 1-5.66.35l-3.8-1.57A10 10 0 1 0 12 2Zm-4.66 13.2.9.37a2.14 2.14 0 1 0 1.2-2.87l1.04.43a1.58 1.58 0 1 1-1.2 2.91l-.94-.38Zm7.98-3.7a2.52 2.52 0 1 0 0-5.05 2.52 2.52 0 0 0 0 5.04Zm0-.63a1.9 1.9 0 1 1 0-3.79 1.9 1.9 0 0 1 0 3.79Z"/></svg>
+        <span class="st-b"><span class="st-k">PC &middot; Get it on</span><span class="st-t">Steam</span></span>
+        <span class="st-a" aria-hidden="true">&nearr;</span>
+      </a>
+    </article>
+
+  </div>
+
+  <footer class="foot">
+    <span>&copy; Lab-47</span>
+    <a href="index.html">lab-47.com &rarr;</a>
+  </footer>
+
+</main>
+</body>
+</html>

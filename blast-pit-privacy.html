@@ -54,7 +54,7 @@
               <path d="M12 2.5 4 5.6v6c0 4.6 3.2 8.4 8 9.9 4.8-1.5 8-5.3 8-9.9v-6L12 2.5Z"/>
               <path d="M8.7 12.1 11 14.4l4.4-4.5"/>
             </svg>
-            <span><b>Blast Pit</b>Privacy policy &middot; v1.0</span>
+            <span><b>Blast Pit</b>Privacy policy &middot; v1.1</span>
           </div>
           <h1 class="h1">What Blast Pit knows about you.</h1>
           <p class="lede">Short answer: not who you are. There are no accounts and your progress never leaves your phone. What does leave it goes to three services: Google AdMob, for the ads that keep the game free; GameAnalytics, to see how runs play out and to fine-tune the game&rsquo;s balance; and Google Analytics for Firebase, to learn which ads bring players in. One switch in the game turns both analytics services off. The long answer is below, in plain language.</p>
@@ -97,7 +97,7 @@
   <section class="section section--tight">
     <div class="wrap">
       <dl class="specs">
-        <div class="cell"><dt>Effective</dt><dd>15 October 2026</dd></div>
+        <div class="cell"><dt>Effective</dt><dd>25 October 2026</dd></div>
         <div class="cell"><dt>Application</dt><dd>Blast Pit</dd></div>
         <div class="cell"><dt>Version</dt><dd>1.0 and later</dd></div>
         <div class="cell"><dt>Platform</dt><dd>Android</dd></div>
@@ -143,7 +143,7 @@
         </div>
         <div class="entry">
           <div class="what">Gameplay events<small>App activity</small></div>
-          <div class="why">Sessions and how long they last, and how runs go: when one starts and ends, its score, length and what ended it, the upgrades picked, the tools used, features unlocked, the tutorial, a few settings changes, and rewarded ads watched.</div>
+          <div class="why">Sessions and how long they last, and how runs go: when one starts and ends, its score, length, world and what ended it, the upgrades picked, the tools used, features unlocked, the tutorial, the world picked on first launch, Daily Run results, a few settings changes, and rewarded ads watched.</div>
           <div class="who">GameAnalytics<br>Firebase</div>
         </div>
         <div class="entry">
@@ -201,10 +201,10 @@
                 <p>Blast Pit stores your progress so that it is there when you return. It is held in the app&rsquo;s private storage on your device and is never sent to us.</p>
                 <ul>
                   <li><strong>Your records and collection</strong> &mdash; best score, run statistics, a short list of recent runs, and the pieces you have made in each world.</li>
-                  <li><strong>What you have earned</strong> &mdash; coins, worlds owned and the one selected, permanent upgrades, rank and rank points, long-term goals.</li>
-                  <li><strong>Your daily streak</strong> &mdash; days played in a row, missed-day passes, today&rsquo;s goals and the weekly challenge.</li>
+                  <li><strong>What you have earned</strong> &mdash; coins, worlds owned and the one selected, permanent upgrades, rank and rank points, long-term goals, and the spark styles unlocked and the one in use.</li>
+                  <li><strong>Your daily streak</strong> &mdash; days played in a row, missed-day passes, today&rsquo;s goals, your Daily Run and weekly challenge scores, and whether today&rsquo;s first-run bonus has been used.</li>
                   <li><strong>A run in progress</strong> &mdash; the pieces in the pit, the score and the upgrades taken &mdash; so that an interrupted run can be resumed.</li>
-                  <li>Sound, music, vibration, motion, shot timer, play data and language settings, and whether you have seen the tutorial.</li>
+                  <li>Sound, music, vibration, motion, shot timer, play data and language settings, whether you have seen the tutorial, and whether you have picked a starting world.</li>
                   <li><strong>When ads were last shown</strong> and how many today, so that ads do not appear too often.</li>
                   <li>For the analytics in sections 3 and 5: the random player ID, a session count, any game settings received by remote tuning, and events waiting to be sent while you are offline.</li>
                 </ul>
@@ -236,7 +236,7 @@
                   <li>a <strong>random player ID</strong> the game creates the first time it opens, a session ID and a session count. <strong>It is not your advertising ID</strong> and is not linked to it;</li>
                   <li><strong>device and app details</strong> &mdash; platform, operating system version, device model and app version;</li>
                   <li>when a session starts and how long it lasts;</li>
-                  <li><strong>gameplay events</strong>: each run&rsquo;s start and end with its score, how long it lasted, how many shots it took, the difficulty it reached and what ended it; the upgrade cards offered and picked; how often each tool was used; features unlocked as you progress; whether the tutorial was skipped; the shot timer, language and play data settings being changed; and which ads were shown or watched to the end, by placement;</li>
+                  <li><strong>gameplay events</strong>: each run&rsquo;s start and end with its world, its score, how long it lasted, how many shots it took, the difficulty it reached and what ended it; whether a run was a scored Daily Run or practice, and whether it earned the first-run-of-the-day bonus; the upgrade cards offered and picked; how often each tool was used; features unlocked as you progress; whether the tutorial was skipped; which starting world was picked on first launch and whether its card was shown first or second; the spark style chosen; the shot timer, language and play data settings being changed; and which ads were shown or watched to the end, by placement;</li>
                   <li>if you are part of a test (section 5), which version of the game you were shown.</li>
                 </ul>
                 <p>Your IP address is visible to GameAnalytics&rsquo; servers, as with any web request, and is used to work out your country. GameAnalytics handles this data for Lab-47 under its terms; its own policy is at <a href="https://gameanalytics.com/privacy" target="_blank" rel="noopener">gameanalytics.com/privacy</a>. Events are sent in small batches about every 20 seconds; events from offline play wait on your device and are sent the next time you are online.</p>
@@ -251,7 +251,7 @@
                 <ul>
                   <li>an <strong>app instance ID</strong>, a random identifier created for this installation of the game, and your <strong>advertising ID</strong>;</li>
                   <li>events it records automatically: the first time the game is opened, each session and how long it lasts, and the app being updated or removed;</li>
-                  <li>a short, fixed list of <strong>gameplay events</strong>: the tutorial begun, finished or skipped; a run starting and ending, with its score, length and cause; an upgrade card picked; a new feature unlocked; and a rewarded ad watched to the end. Two details are attached to the installation: how far along the learning path it is, and whether the shot timer is on;</li>
+                  <li>a short, fixed list of <strong>gameplay events</strong>: the tutorial begun, finished or skipped; the starting world picked on first launch; a run starting and ending, with its world, score, length and cause; an upgrade card picked; a new feature unlocked; and a rewarded ad watched to the end. Three details are attached to the installation: the starting world picked, how far along the learning path it is, and whether the shot timer is on;</li>
                   <li>the <strong>install referrer</strong> Google Play passes to the app, which names the ad campaign, if any, that led to the install;</li>
                   <li><strong>device and app details</strong> &mdash; model, operating system version, language and app version &mdash; and your country or region, worked out from your IP address. Google Analytics does not store the IP address itself;</li>
                   <li>ad impressions and the estimated revenue they earned, as reported by AdMob.</li>
@@ -350,7 +350,8 @@
                     <tbody>
                       <tr><td><code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code></td><td>Request ads, send play data, fetch remote tuning, and check whether you are online.</td></tr>
                       <tr><td><code>VIBRATE</code></td><td>Haptic feedback when you fire and pieces merge. This can be turned off in the game&rsquo;s <strong>Settings &gt; Vibration</strong>.</td></tr>
-                      <tr><td><code>AD_ID</code>, <code>ACCESS_ADSERVICES_AD_ID</code>, <code>ACCESS_ADSERVICES_ATTRIBUTION</code>, <code>ACCESS_ADSERVICES_TOPICS</code></td><td>The advertising ID and Android&rsquo;s Privacy Sandbox ad features, used by AdMob and Firebase.</td></tr>
+                      <tr><td><code>AD_ID</code>, <code>ACCESS_ADSERVICES_AD_ID</code>, <code>ACCESS_ADSERVICES_ATTRIBUTION</code></td><td>The advertising ID and Android&rsquo;s Privacy Sandbox ad measurement, used by AdMob and Firebase.</td></tr>
+                      <tr><td><code>READ_BASIC_PHONE_STATE</code></td><td>Added by Google&rsquo;s ads software to read basic network details, such as the mobile network type, when it requests an ad. It gives no access to your phone number, calls, contacts or messages, and Android does not ask you for it.</td></tr>
                       <tr><td><code>BIND_GET_INSTALL_REFERRER_SERVICE</code></td><td>Read the install referrer from Google Play, used by Firebase (section 4).</td></tr>
                       <tr><td><code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code></td><td>Required by Google&rsquo;s ads and analytics software to load ads and send data reliably.</td></tr>
                       <tr><td><code>DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code></td><td>An internal permission Android libraries add so that only Blast Pit itself can send messages to its own components. No other app can hold it.</td></tr>
@@ -366,6 +367,7 @@
                 <h2>Contact and changes</h2>
                 <p>For any question about this policy or about data in Blast Pit, write to <a href="mailto:contact@lab-47.com">contact@lab-47.com</a>.</p>
                 <p>If the game changes in a way that affects this policy, we will update this page and the effective date shown above, and note material changes in the app&rsquo;s store listing. This policy applies to the Blast Pit app only, and not to any site or service it links to.</p>
+                <p><strong>Changes in v1.1 (25 October 2026):</strong> added the Daily Run, spark styles and starting-world choice to the data stored on your device (section 1) and to the gameplay events sent to GameAnalytics and Firebase (sections 3 and 4); updated the permissions list to match the current build (section 13).</p>
               </div>
             </section>
 
@@ -374,7 +376,7 @@
           <div class="pol-sign">
             <div>
               <div class="who">Lab&mdash;47</div>
-              <div class="meta">Blast Pit &middot; privacy policy v1.0 &middot; effective 15 October 2026</div>
+              <div class="meta">Blast Pit &middot; privacy policy v1.1 &middot; effective 25 October 2026</div>
             </div>
             <a class="btn" href="mailto:contact@lab-47.com">Ask a question <span class="arr">&rarr;</span></a>
           </div>

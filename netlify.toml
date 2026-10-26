@@ -1,3 +1,10 @@
 # lab-47.com is a plain static site: no build step, publish the repository root.
 [build]
   publish = "."
+
+# AdMob reads the developer website off the App Store listing, which is
+# lab-47.com/blockwave; serve the same app-ads.txt under that path too.
+[[redirects]]
+  from = "/blockwave/app-ads.txt"
+  to = "/app-ads.txt"
+  status = 200

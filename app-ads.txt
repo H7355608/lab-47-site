@@ -8,4 +8,5 @@ google.com, pub-9686128942266440, DIRECT, f08c47fec0942fa0
 #
 # The google.com record above is Google AdMob, publisher pub-9686128942266440. Used by:
 #   - Blockwave: Merge Number Puzzle (Android, com.lab47.blockwave, AdMob app ca-app-pub-9686128942266440~6490241907)
+#   - Blockwave: 2048 Merge Puzzle (iOS, AdMob app ca-app-pub-9686128942266440~8361543968)
 #   - Wardline: Hospital Tycoon (Android, com.greylane.wardline)
